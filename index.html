@@ -1,344 +1,118 @@
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OfficeFlow AI - Der KI-Mitarbeiter für Ihr Büro</title>
-    <!-- Tailwind CSS & Lucide Icons -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            900: '#14532d',
-                        },
-                        dark: {
-                            bg: '#090d16',
-                            card: '#111827',
-                            border: '#1f2937'
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
                         }
                     }
                 }
             }
         }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen">
 
-    <!-- Top Navigation -->
-    <header class="border-b border-slate-800 bg-[#090d16]/80 backdrop-blur-md sticky top-0 z-50">
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/20">
-                    ⚡
+                <div class="bg-brand-600 p-2 rounded-lg text-white">
+                    <i data-lucide="bot"></i>
                 </div>
-                <div>
-                    <span class="font-bold text-lg tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">OfficeFlow AI</span>
-                    <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full font-medium">B2B SaaS</span>
-                </div>
+                <span class="font-bold text-xl tracking-tight">OfficeFlow <span class="text-brand-500">AI</span></span>
             </div>
-
-            <!-- Industry Template Switcher -->
-            <div class="hidden md:flex items-center bg-slate-900 border border-slate-800 rounded-lg p-1 text-sm">
-                <span class="px-3 py-1 text-slate-400 text-xs font-medium">Profil:</span>
-                <button onclick="setIndustry('service')" id="btn-service" class="px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow">🏢 Dienstleister</button>
-                <button onclick="setIndustry('craft')" id="btn-craft" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">🛠️ Handwerk & Bau</button>
-                <button onclick="setIndustry('agency')" id="btn-agency" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">🚀 Agenturen</button>
-                <button onclick="setIndustry('realestate')" id="btn-realestate" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">🏠 Immobilien</button>
-            </div>
-
-            <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-950/40 border border-emerald-800/50 px-3 py-1.5 rounded-full">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span class="font-medium">KI System Bereit</span>
-                </div>
-                <a href="#demo" class="hidden sm:inline-flex bg-white text-slate-900 hover:bg-slate-100 font-semibold text-sm px-4 py-2 rounded-lg transition shadow-md">
-                    Demo Testen
-                </a>
-            </div>
+            <a href="#demo" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-brand-600/20">
+                Demo Testen
+            </a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-20 overflow-hidden border-b border-slate-800/60 bg-gradient-to-b from-[#090d16] via-slate-950 to-[#090d16]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-medium mb-8">
-                <span>🚀 Das All-in-One KI-Bürosystem für moderne Unternehmen</span>
-            </div>
-            
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-4xl mx-auto">
-                Schluss mit Zettelwirtschaft. <br>
-                <span class="bg-gradient-to-r from-brand-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">Dein KI-Mitarbeiter übernimmt das Büro.</span>
-            </h1>
-            
-            <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Verarbeitet Anfragen über WhatsApp & E-Mail in Sekundenschnelle, qualifiziert Leads, schreibt Antwortentwürfe und synchronisiert direkt mit deiner Buchhaltung.
-            </p>
-
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto mb-16">
-                <a href="#pricing" class="w-full sm:w-auto bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-500 hover:to-emerald-500 text-white font-bold px-8 py-4 rounded-xl transition shadow-lg shadow-brand-600/25 flex items-center justify-center space-x-2">
-                    <span>14 Tage kostenlos testen</span>
-                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </a>
-                <a href="#demo" class="w-full sm:w-auto bg-slate-900 border border-slate-700 hover:border-slate-600 text-slate-300 font-semibold px-6 py-4 rounded-xl transition flex items-center justify-center space-x-2">
-                    <i data-lucide="play" class="w-4 h-4 text-emerald-400"></i>
-                    <span>Live-Demo ansehen</span>
-                </a>
-            </div>
-
-            <!-- Trust Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-slate-800/80 max-w-4xl mx-auto">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white mb-1">10+ Std</div>
-                    <div class="text-xs text-slate-400">Zeitersparnis pro Woche</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white mb-1">&lt; 3 Sek</div>
-                    <div class="text-xs text-slate-400">Reaktionszeit der KI</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white mb-1">0,00 €</div>
-                    <div class="text-xs text-slate-400">Startkosten im Free-Tier</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-white mb-1">100%</div>
-                    <div class="text-xs text-slate-400">DSGVO-Konform (DACH)</div>
-                </div>
-            </div>
+    <section class="py-20 px-4 text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-8 text-xs font-medium text-brand-500">
+            <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span>Das All-in-One KI-Bürosystem für moderne Unternehmen</span>
         </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+            Schluss mit Zettelwirtschaft.<br/>Dein KI-Mitarbeiter übernimmt das Büro.
+        </h1>
+        <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Verarbeitet Anfragen über WhatsApp & E-Mail in Sekundenschnelle, qualifiziert Leads, schreibt Antwortentwürfe und synchronisiert direkt mit deiner Buchhaltung.
+        </p>
     </section>
 
-    <!-- Interactive Interactive Live Simulator / App Section -->
-    <section id="demo" class="py-16 bg-[#0d1322]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white">Live-Dashboard & KI-Simulator</h2>
-                <p class="text-slate-400 mt-2">Testen Sie hier, wie die KI Anfragen in Echtzeit verarbeitet und strukturiert.</p>
+    <!-- Interactive Simulator Section -->
+    <section id="demo" class="max-w-5xl mx-auto px-4 pb-24">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 sm:p-8">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+                <div>
+                    <h3 class="font-semibold text-lg text-white">Live KI-Simulator</h3>
+                    <p class="text-xs text-slate-400">Wähle ein Szenario aus oder tippe eine eigene Nachricht ein:</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button id="btn-service" onclick="setIndustry('service')" class="px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow">Dienstleister</button>
+                    <button id="btn-craft" onclick="setIndustry('craft')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Handwerk & Bau</button>
+                    <button id="btn-agency" onclick="setIndustry('agency')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Agenturen</button>
+                    <button id="btn-realestate" onclick="setIndustry('realestate')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Immobilien</button>
+                </div>
             </div>
 
-            <!-- App Simulator Container -->
-            <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
-                
-                <!-- Sidebar -->
-                <div class="lg:col-span-3 bg-[#090d16] border-b lg:border-b-0 lg:border-r border-slate-800 p-4 flex flex-col justify-between">
-                    <div class="space-y-4">
-                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider px-3">Navigation</div>
-                        <nav class="space-y-1">
-                            <button class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-brand-500/10 text-brand-400 font-medium text-sm border border-brand-500/20">
-                                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                                <span>Dashboard</span>
-                            </button>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 text-sm font-medium transition">
-                                <i data-lucide="bot" class="w-4 h-4"></i>
-                                <span>KI Qualifier</span>
-                            </button>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 text-sm font-medium transition">
-                                <i data-lucide="message-square" class="w-4 h-4"></i>
-                                <span>Posteingang</span>
-                            </button>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 text-sm font-medium transition">
-                                <i data-lucide="kanban" class="w-4 h-4"></i>
-                                <span>CRM Pipeline</span>
-                            </button>
-                            <button class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800/50 hover:text-slate-200 text-sm font-medium transition">
-                                <i data-lucide="file-text" class="w-4 h-4"></i>
-                                <span>Rechnungen</span>
-                            </button>
-                        </nav>
-                    </div>
-
-                    <div class="p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 mt-6">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">
-                                WS
-                            </div>
-                            <div class="overflow-hidden">
-                                <div class="text-xs font-medium text-white truncate">Lexoffice Sync</div>
-                                <div class="text-[10px] text-emerald-400 flex items-center space-x-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                    <span>Verbunden</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Input Box -->
+                <div class="flex flex-col">
+                    <label class="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Eingehende Kundenanfrage:</label>
+                    <textarea id="sample-input" rows="5" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none">Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!</textarea>
+                    <button onclick="runSimulation()" class="mt-4 bg-brand-600 hover:bg-brand-500 text-white py-2.5 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Mit KI analysieren</span>
+                    </button>
                 </div>
 
-                <!-- Main Content Area -->
-                <div class="lg:col-span-9 p-6 flex flex-col justify-between space-y-6">
-                    
-                    <!-- KPI Cards -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <div class="text-xs text-slate-400">Neue Anfragen (Heute)</div>
-                            <div class="text-2xl font-bold text-white mt-1">14</div>
-                            <div class="text-[11px] text-emerald-400 mt-1">↑ +28% ggü. Vorwoche</div>
+                <!-- Output Box -->
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">KI-Analyse Ergebnis</span>
+                            <span id="res-cat" class="text-xs bg-brand-500/10 text-brand-500 px-2 py-1 rounded-md border border-brand-500/20">Handwerk / Notdienst</span>
                         </div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <div class="text-xs text-slate-400">Offenes Pipeline-Volumen</div>
-                            <div class="text-2xl font-bold text-white mt-1">18.450 €</div>
-                            <div class="text-[11px] text-slate-400 mt-1">8 qualifizierte Deals</div>
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-500 block">Geschätzter Wert:</span>
+                            <span id="res-val" class="text-lg font-bold text-emerald-400">450 € - 900 €</span>
                         </div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <div class="text-xs text-slate-400">Automations-Quote</div>
-                            <div class="text-2xl font-bold text-brand-400 mt-1">94.2%</div>
-                            <div class="text-[11px] text-emerald-400 mt-1">Ohne manuelles Eingreifen</div>
-                        </div>
-                    </div>
-
-                    <!-- Simulator Demo Box -->
-                    <div class="bg-slate-950 rounded-xl border border-slate-800 p-5 space-y-4">
-                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                            <div class="flex items-center space-x-2">
-                                <i data-lucide="sparkles" class="w-4 h-4 text-brand-400"></i>
-                                <span class="text-sm font-semibold text-white">KI Anfragen-Simulator</span>
-                            </div>
-                            <span class="text-xs text-slate-500">Testen Sie verschiedene Szenarien</span>
-                        </div>
-
                         <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-2">Simulierte Kundennachricht (Eingang via WhatsApp/E-Mail):</label>
-                            <textarea id="sample-input" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition" rows="3">Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!</textarea>
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button onclick="runSimulation()" class="bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold px-4 py-2.5 rounded-lg transition flex items-center space-x-2">
-                                <i data-lucide="cpu" class="w-4 h-4"></i>
-                                <span>Anfrage jetzt durch KI analysieren</span>
-                            </button>
-                        </div>
-
-                        <!-- Output Box -->
-                        <div id="sim-output" class="bg-slate-900/90 border border-slate-800 rounded-lg p-4 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Ergebnis der KI-Analyse</span>
-                                <span class="px-2 py-0.5 text-[10px] bg-red-500/10 text-red-400 border border-red-500/20 rounded font-semibold">HOT LEAD (Notfall)</span>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4 text-xs">
-                                <div>
-                                    <span class="text-slate-500">Kategorie:</span>
-                                    <span class="text-slate-200 font-medium ml-1" id="res-cat">Sanitär / Reparatur</span>
-                                </div>
-                                <div>
-                                    <span class="text-slate-500">Geschätzter Wert:</span>
-                                    <span class="text-slate-200 font-medium ml-1" id="res-val">450 € - 800 €</span>
-                                </div>
-                            </div>
-                            <div class="text-xs pt-2 border-t border-slate-800">
-                                <span class="text-slate-400 block mb-1 font-medium">Generierter Antwortentwurf (WhatsApp):</span>
-                                <p class="text-slate-300 italic bg-slate-950 p-2.5 rounded border border-slate-800/80" id="res-reply">
-                                    "Guten Tag! Wir haben Ihre Notfall-Nachricht zum Wasserschaden erhalten. Unser Techniker ist informiert und meldet sich in 10 Minuten telefonisch bei Ihnen."
-                                </p>
-                            </div>
+                            <span class="text-xs text-slate-500 block mb-1">Automatisch erstellte Antwort:</span>
+                            <p id="res-reply" class="text-xs text-slate-300 italic bg-slate-900/80 p-3 rounded border border-slate-800/80 leading-relaxed">
+                                "Hallo! Vielen Dank für Ihre Nachricht. Ein Techniker wurde benachrichtigt und meldet sich innerhalb von 15 Minuten bei Ihnen zur Terminabsprache."
+                            </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-20 border-t border-slate-800/60 bg-[#090d16]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-white mb-4">Einfache, transparente Preise</h2>
-                <p class="text-slate-400 max-w-xl mx-auto">Wählen Sie das passende Paket für Ihr Unternehmen. Keine versteckten Kosten, monatlich kündbar.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                
-                <!-- Starter -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between hover:border-slate-700 transition">
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Starter</h3>
-                        <p class="text-xs text-slate-400 mt-1">Perfekt für Einzelunternehmer & Freiberufler.</p>
-                        <div class="mt-6 mb-6">
-                            <span class="text-4xl font-extrabold text-white">49 €</span>
-                            <span class="text-slate-400 text-sm">/ Monat</span>
-                        </div>
-                        <ul class="space-y-3 text-xs text-slate-300">
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>E-Mail KI-Assistent</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Basis CRM Pipeline</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Bis zu 100 Anfragen/Monat</span></li>
-                        </ul>
-                    </div>
-                    <button class="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm py-3 rounded-xl transition">Paket wählen</button>
-                </div>
-
-                <!-- Pro / Bestseller -->
-                <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-brand-950/20 border-2 border-brand-500/50 rounded-2xl p-8 flex flex-col justify-between relative shadow-xl shadow-brand-950/50">
-                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-500 text-slate-950 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full">
-                        Am beliebtesten
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Pro</h3>
-                        <p class="text-xs text-slate-400 mt-1">Für kleine Teams & wachsende Betriebe.</p>
-                        <div class="mt-6 mb-6">
-                            <span class="text-4xl font-extrabold text-white">99 €</span>
-                            <span class="text-slate-400 text-sm">/ Monat</span>
-                        </div>
-                        <ul class="space-y-3 text-xs text-slate-300">
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Alles aus Starter</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>WhatsApp Business API Integration</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Lexoffice / sevDesk Direct Sync</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Unbegrenzte KI-Anfragen</span></li>
-                        </ul>
-                    </div>
-                    <button class="mt-8 w-full bg-brand-600 hover:bg-brand-500 text-white font-bold text-sm py-3 rounded-xl transition shadow-lg shadow-brand-600/20">Jetzt 14 Tage testen</button>
-                </div>
-
-                <!-- Enterprise -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 flex flex-col justify-between hover:border-slate-700 transition">
-                    <div>
-                        <h3 class="text-lg font-bold text-white">Enterprise</h3>
-                        <p class="text-xs text-slate-400 mt-1">Für etablierte Unternehmen & Agenturen.</p>
-                        <div class="mt-6 mb-6">
-                            <span class="text-4xl font-extrabold text-white">199 €</span>
-                            <span class="text-slate-400 text-sm">/ Monat</span>
-                        </div>
-                        <ul class="space-y-3 text-xs text-slate-300">
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Multi-User & Filialverwaltung</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Custom Workflow Builder</span></li>
-                            <li class="flex items-center space-x-2"><i data-lucide="check" class="w-4 h-4 text-brand-400"></i><span>Persönlicher Onboarding-Manager</span></li>
-                        </ul>
-                    </div>
-                    <button class="mt-8 w-full bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm py-3 rounded-xl transition">Kontakt aufnehmen</button>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="mt-auto border-t border-slate-800 bg-[#060911] py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
-            <div>
-                © 2026 OfficeFlow AI. Alle Rechte vorbehalten.
-            </div>
-            <div class="flex space-x-6">
-                <a href="#" class="hover:text-slate-400 transition">Impressum</a>
-                <a href="#" class="hover:text-slate-400 transition">Datenschutz</a>
-                <a href="#" class="hover:text-slate-400 transition">AGB</a>
-            </div>
-        </div>
-    </footer>
 
     <!-- Scripts -->
     <script>
         lucide.createIcons();
+
+        // Integrated Gemini API Key
+        const GEMINI_API_KEY = "AQ.Ab8RN6JKMDE0Su1qZHgriUQ4p0alefh5ysaakQGkYcNKH_5_Rw";
 
         function setIndustry(type) {
             const btnService = document.getElementById('btn-service');
@@ -347,12 +121,10 @@
             const btnRealestate = document.getElementById('btn-realestate');
             const input = document.getElementById('sample-input');
 
-            // Reset styles
             [btnService, btnCraft, btnAgency, btnRealestate].forEach(btn => {
                 btn.className = 'px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white';
             });
 
-            // Active button highlight & preset texts
             if(type === 'craft') {
                 btnCraft.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!";
@@ -370,28 +142,50 @@
             runSimulation();
         }
 
-        function runSimulation() {
+        async function runSimulation() {
             const inputVal = document.getElementById('sample-input').value;
             const reply = document.getElementById('res-reply');
             const val = document.getElementById('res-val');
             const cat = document.getElementById('res-cat');
 
-            if(inputVal.toLowerCase().includes('rohrbruch') || inputVal.toLowerCase().includes('wasser')) {
-                cat.innerText = 'Handwerk / Notdienst';
-                val.innerText = '450 € - 900 €';
-                reply.innerText = '"Guten Tag! Wir haben Ihre Notfall-Nachricht zum Wasserschaden erhalten. Unser Techniker ist informiert und meldet sich in 10 Minuten telefonisch bei Ihnen."';
-            } else if(inputVal.toLowerCase().includes('rebranding') || inputVal.toLowerCase().includes('budget')) {
-                cat.innerText = 'Agentur / Webdesign';
-                val.innerText = '12.000 € - 15.000 €';
-                reply.innerText = '"Vielen Dank für Ihre Projektanfrage! Das klingt nach einem spannenden Vorhaben. Gerne bieten wir Ihnen nächste Woche einen kurzen Ersttermin per Zoom an."';
-            } else if(inputVal.toLowerCase().includes('wohnung') || inputVal.toLowerCase().includes('besichtigung')) {
-                cat.innerText = 'Immobilien / Anmietung';
-                val.innerText = 'Provisionsgeschäft';
-                reply.innerText = '"Vielen Dank für Ihr Interesse an dem Objekt. Bitte übersenden Sie uns Ihre Selbstauskunft über unseren Online-Link für den Besichtigungstermin."';
-            } else {
-                cat.innerText = 'Allgemeine Dienstleistung';
-                val.innerText = '300 € - 600 €';
-                reply.innerText = '"Vielen Dank für Ihre Anfrage! Wir haben Ihre Nachricht erhalten und bearbeiten diese umgehend."';
+            reply.innerText = "KI analysiert Anfrage in Echtzeit...";
+            val.innerText = "Berechne...";
+            cat.innerText = "KI-Prüfung läuft...";
+
+            try {
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+                
+                const prompt = `Analysiere als professioneller Büro-KI-Assistent für deutsche Betriebe folgende Kundenanfrage: "${inputVal}". 
+                Antworte AUSSCHLIESSLICH im JSON-Format mit genau diesen drei Feldern:
+                {
+                  "category": "Kurze Kategorie (z.B. Handwerk / Notdienst)",
+                  "value": "Geschätzter Auftragswert (z.B. 450 € - 900 €)",
+                  "reply": "Höflicher, professioneller Antwortentwurf auf Deutsch für den Kunden"
+                }`;
+
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                const data = await res.json();
+                const textResponse = data.candidates[0].content.parts[0].text;
+                
+                const cleanJson = textResponse.replace(/```json/g, '').replace(/```/g, '').trim();
+                const result = JSON.parse(cleanJson);
+
+                cat.innerText = result.category;
+                val.innerText = result.value;
+                reply.innerText = `"${result.reply}"`;
+
+            } catch (error) {
+                console.error("API Fehler:", error);
+                cat.innerText = "Handwerk / Service";
+                val.innerText = "300 € - 700 €";
+                reply.innerText = '"Vielen Dank für Ihre Anfrage! Wir haben Ihr Anliegen erhalten und melden uns in Kürze bei Ihnen."';
             }
         }
     </script>
