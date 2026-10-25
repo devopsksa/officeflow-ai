@@ -4,572 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OfficeFlow AI - Der KI-Mitarbeiter für Ihr Büro</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            900: '#0c4a6e',
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                        },
+                        accent: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Custom Scrollbar & Aesthetics -->
-    <style>
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #020617;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
-    </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen selection:bg-brand-500 selection:text-white">
 
     <!-- Header / Navbar -->
-    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-40">
+    <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="#" class="flex items-center space-x-3 group">
-                <div class="bg-brand-600 p-2 rounded-xl text-white shadow-lg shadow-brand-600/30 group-hover:scale-105 transition-transform">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-brand-600 to-accent-500 p-2.5 rounded-xl text-white shadow-lg shadow-brand-500/20">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
                 </div>
-                <span class="font-bold text-xl tracking-tight">OfficeFlow <span class="text-brand-400">AI</span></span>
-            </a>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
-                <a href="#demo" class="hover:text-brand-400 transition-colors">KI-Demo</a>
-                <a href="#vorteile" class="hover:text-brand-400 transition-colors">Vorteile</a>
-                <a href="#roi" class="hover:text-brand-400 transition-colors">ROI-Rechner</a>
-                <a href="#preise" class="hover:text-brand-400 transition-colors">Preise</a>
-                <a href="#kontakt" class="hover:text-brand-400 transition-colors">Kontakt</a>
-            </nav>
-            <div class="flex items-center space-x-4">
-                <a href="#demo" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-brand-600/25 active:scale-95">
-                    Demo Testen
-                </a>
+                <span class="font-bold text-xl tracking-tight text-white">OfficeFlow <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400">AI</span></span>
             </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-400">
+                <a href="#demo" class="hover:text-white transition-colors">KI-Demo</a>
+                <a href="#vorteile" class="hover:text-white transition-colors">Vorteile</a>
+                <a href="#roi" class="hover:text-white transition-colors">ROI-Rechner</a>
+                <a href="#preise" class="hover:text-white transition-colors">Preise</a>
+            </nav>
+            <a href="#demo" class="bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg shadow-brand-600/25 active:scale-95">
+                Demo Testen
+            </a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="py-20 px-4 text-center max-w-4xl mx-auto relative overflow-hidden">
-        <div class="absolute inset-0 -z-10 flex items-center justify-center">
-            <div class="w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        </div>
+    <section class="py-24 px-4 text-center max-w-4xl mx-auto relative overflow-hidden">
+        <!-- Glow Effect Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand-600/15 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-8 text-xs font-medium text-brand-400">
-            <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Das All-in-One KI-Bürosystem für moderne Unternehmen</span>
+        <div class="inline-flex items-center space-x-2 bg-slate-900/90 border border-brand-500/30 rounded-full px-4 py-1.5 mb-8 text-xs font-semibold text-accent-400 shadow-inner">
+            <span class="flex h-2 w-2 rounded-full bg-accent-400 animate-pulse"></span>
+            <span>Intelligente Büro-Automatisierung 2.0</span>
         </div>
-        
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent leading-tight">
-            Schluss mit Zettelwirtschaft.<br/><span class="text-brand-400">Dein KI-Mitarbeiter</span> übernimmt das Büro.
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent leading-tight">
+            Schluss mit Zettelwirtschaft.<br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 via-accent-400 to-brand-500">Dein KI-Mitarbeiter</span> übernimmt das Büro.
         </h1>
-        
         <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Verarbeitet Anfragen über WhatsApp & E-Mail in Sekundenschnelle, qualifiziert Leads automatisiert, schreibt Antwortentwürfe und synchronisiert direkt mit Ihrer Software.
+            Verarbeitet Anfragen über WhatsApp & E-Mail in Sekundenschnelle, qualifiziert Leads, schreibt Antwortentwürfe und synchronisiert direkt mit deiner Buchhaltung.
         </p>
-
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#demo" class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-3.5 rounded-xl font-semibold transition flex items-center justify-center space-x-2 shadow-xl shadow-brand-600/30 active:scale-95">
+        <div class="flex justify-center gap-4">
+            <a href="#demo" class="bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold transition flex items-center space-x-2 shadow-xl shadow-brand-600/30 active:scale-95">
                 <span>Jetzt ausprobieren</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </a>
-            <a href="#roi" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 px-8 py-3.5 rounded-xl font-semibold transition flex items-center justify-center active:scale-95">
-                Ersparnis berechnen
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
             </a>
         </div>
     </section>
 
     <!-- Live KI-Simulator Section -->
-    <section id="demo" class="max-w-5xl mx-auto px-4 py-16">
-        <div class="text-center mb-10">
-            <h2 class="text-3xl font-bold mb-3">Live KI-Simulator</h2>
-            <p class="text-slate-400 text-sm">Erleben Sie live, wie OfficeFlow AI eingehende Kundenanfragen analysiert und beantwortet.</p>
-        </div>
-
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 sm:p-8">
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
+    <section id="demo" class="max-w-5xl mx-auto px-4 pb-24">
+        <div class="bg-slate-900/90 border border-slate-800/80 rounded-3xl shadow-2xl p-6 sm:p-8 backdrop-blur-xl relative">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800/80">
                 <div>
-                    <h3 class="font-semibold text-lg text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                        </svg>
-                        Szenario auswählen:
+                    <h3 class="font-bold text-xl text-white flex items-center gap-2.5">
+                        <i data-lucide="sparkles" class="text-accent-400 w-5 h-5"></i> Live KI-Simulator
                     </h3>
+                    <p class="text-xs text-slate-400 mt-1">Klicke eine Branche an oder tippe einen eigenen Text ein:</p>
                 </div>
-                <div class="flex flex-wrap gap-2" id="preset-buttons">
-                    <button type="button" onclick="selectPreset('service')" id="preset-service" class="px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-slate-800 text-slate-300 hover:bg-slate-700">Dienstleister</button>
-                    <button type="button" onclick="selectPreset('craft')" id="preset-craft" class="px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-slate-800 text-slate-300 hover:bg-slate-700">Handwerk & Bau</button>
-                    <button type="button" onclick="selectPreset('agency')" id="preset-agency" class="px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-slate-800 text-slate-300 hover:bg-slate-700">Agenturen</button>
-                    <button type="button" onclick="selectPreset('realestate')" id="preset-realestate" class="px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-brand-600 text-white shadow-md shadow-brand-600/30">Immobilien</button>
+                <!-- Branchen-Buttons -->
+                <div class="flex flex-wrap gap-2" id="industry-buttons">
+                    <button type="button" onclick="setIndustry('service')" id="btn-service" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/50">Dienstleister</button>
+                    <button type="button" onclick="setIndustry('craft')" id="btn-craft" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/50">Handwerk & Bau</button>
+                    <button type="button" onclick="setIndustry('agency')" id="btn-agency" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/50">Agenturen</button>
+                    <button type="button" onclick="setIndustry('realestate')" id="btn-realestate" class="px-3.5 py-1.5 rounded-md text-xs font-semibold transition bg-gradient-to-r from-brand-600 to-brand-700 text-white shadow-md border border-brand-500/30">Immobilien</button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Input Column -->
+                <!-- Eingabe -->
                 <div class="flex flex-col">
-                    <label for="sample-input" class="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Eingehende Anfrage (Editierbar):</label>
-                    <textarea id="sample-input" rows="7" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none leading-relaxed">Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?</textarea>
+                    <label class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider flex items-center justify-between">
+                        <span>Eingehende Kundenanfrage:</span>
+                        <span class="text-[10px] text-slate-500 font-normal">Editierbar</span>
+                    </label>
+                    <textarea id="sample-input" rows="6" class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-4 text-sm text-slate-200 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition resize-none leading-relaxed">Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?</textarea>
                     
-                    <button type="button" id="analyze-btn" onclick="executeAnalysis()" class="mt-4 bg-brand-600 hover:bg-brand-500 text-white py-3.5 rounded-xl text-sm font-semibold transition flex items-center justify-center space-x-2 shadow-lg shadow-brand-600/25 active:scale-95">
-                        <svg id="btn-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+                    <button type="button" id="analyze-btn" onclick="runSimulation()" class="mt-4 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white py-3.5 rounded-xl text-sm font-semibold transition flex items-center justify-center space-x-2 shadow-lg shadow-brand-600/25 active:scale-95">
+                        <i data-lucide="zap" class="w-4 h-4 text-accent-400"></i>
                         <span id="btn-text">Mit KI analysieren</span>
                     </button>
                 </div>
 
-                <!-- Output Column -->
-                <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between relative overflow-hidden">
-                    <div id="loading-overlay" class="hidden absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center space-y-3">
-                        <div class="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
-                        <span class="text-xs font-medium text-brand-400">KI analysiert Anliegen...</span>
-                    </div>
-
+                <!-- Ausgabe -->
+                <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Ergebnis</span>
-                            <span id="res-cat" class="text-xs bg-brand-500/10 text-brand-400 px-3 py-1 rounded-full border border-brand-500/20 font-semibold">Immobilien / Besichtigung</span>
+                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">KI-Analyse Ergebnis</span>
+                            <span id="res-cat" class="text-xs bg-brand-500/10 text-accent-400 px-3 py-1 rounded-full border border-brand-500/20 font-semibold">Immobilien / Besichtigung</span>
                         </div>
-                        <div class="mb-5 bg-slate-900/60 p-3.5 rounded-lg border border-slate-800/80">
-                            <span class="text-xs text-slate-400 block mb-1">Geschätzter Auftragswert / Relevanz:</span>
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-500 block mb-1">Geschätzter Auftragswert:</span>
                             <span id="res-val" class="text-xl font-bold text-emerald-400">1.200 € / Monat (Miete)</span>
                         </div>
                         <div>
-                            <span class="text-xs text-slate-400 block mb-2 font-medium">Automatisch verfasster Antwortentwurf:</span>
-                            <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 italic leading-relaxed relative">
-                                <span id="res-reply">"Guten Tag! Vielen Dank für Ihr Interesse an der 3-Zimmer-Wohnung. Gerne bieten wir Ihnen nächste Woche am Dienstag um 16:00 Uhr einen Besichtigungstermin an. Passt Ihnen das?"</span>
-                            </div>
+                            <span class="text-xs text-slate-500 block mb-2">Automatisch erstellte Antwort:</span>
+                            <p id="res-reply" class="text-xs text-slate-300 italic bg-slate-900/90 p-4 rounded-xl border border-slate-800/90 leading-relaxed shadow-inner">
+                                "Guten Tag! Vielen Dank für Ihr Interesse an der 3-Zimmer-Wohnung. Gerne bieten wir Ihnen nächste Woche am Dienstag um 16:00 Uhr einen Besichtigungstermin an. Passt Ihnen das?"
+                            </p>
                         </div>
-                    </div>
-
-                    <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500">
-                        <span class="flex items-center gap-1">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Status: Bereit
-                        </span>
-                        <span>Verarbeitungszeit: &lt; 0.2s</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Advantages Grid Section -->
-    <section id="vorteile" class="py-16 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-3">Warum moderne Büros auf OfficeFlow AI setzen</h2>
-            <p class="text-slate-400 text-sm max-w-xl mx-auto">Automatisieren Sie wiederkehrende Aufgaben und konzentrieren Sie sich auf das Wachstum Ihres Unternehmens.</p>
+    <!-- ROI-Rechner Section -->
+    <section id="roi" class="py-20 bg-slate-900/30 border-y border-slate-800/60">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-extrabold mb-3">Wie viel Zeit & Geld spart OfficeFlow AI?</h2>
+            <p class="text-slate-400 text-sm mb-10">Berechne dein Ersparnispotenzial pro Monat:</p>
+
+            <div class="bg-slate-900/80 border border-slate-800 p-8 rounded-2xl text-left grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-xl">
+                <div>
+                    <label class="text-xs text-slate-400 font-semibold block mb-2">Anfragen pro Woche: <span id="roi-inquiries-val" class="text-accent-400 font-bold text-sm">50</span></label>
+                    <input type="range" id="roi-inquiries" min="10" max="200" value="50" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950 cursor-pointer h-2 rounded-lg">
+                    
+                    <label class="text-xs text-slate-400 font-semibold block mt-6 mb-2">Stundenlohn im Büro (€): <span id="roi-wage-val" class="text-accent-400 font-bold text-sm">35 €</span></label>
+                    <input type="range" id="roi-wage" min="20" max="80" value="35" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950 cursor-pointer h-2 rounded-lg">
+                </div>
+                <div class="bg-slate-950/90 p-6 rounded-xl border border-slate-800/80 text-center shadow-inner">
+                    <span class="text-xs text-slate-400 block mb-2 font-medium uppercase tracking-wider">Monatliche Ersparnis</span>
+                    <span id="roi-result" class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-accent-400 block mb-1">700 €</span>
+                    <span id="roi-hours" class="text-xs text-slate-400 block font-medium">~ 20 Arbeitsstunden eingespart</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preisübersicht Section -->
+    <section id="preise" class="py-24 max-w-5xl mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-extrabold mb-3">Transparente Preise für Ihr Büro</h2>
+            <p class="text-slate-400 text-sm">Keine versteckten Kosten. Jederzeit kündbar.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-brand-500/10 text-brand-400 rounded-xl flex items-center justify-center mb-4 border border-brand-500/20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <h3 class="font-bold text-lg mb-2">24/7 Sofort-Antworten</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">Kundenanfragen werden Tag und Nacht innerhalb von Minuten qualifiziert beantwortet – ohne Personalaufwand.</p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-emerald-500/10 text-emerald-400 rounded-xl flex items-center justify-center mb-4 border border-emerald-500/20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Intelligente Priorisierung</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">Notfälle und lukrative Aufträge werden sofort erkannt und hervorgehoben, Unwichtiges automatisch sortiert.</p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center mb-4 border border-indigo-500/20">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-                <h3 class="font-bold text-lg mb-2">Nahtlose Integration</h3>
-                <p class="text-sm text-slate-400 leading-relaxed">Koppelt sich direkt an Ihre bestehenden CRM-Systeme, WhatsApp Business, E-Mail-Postfächer & Buchhaltung an.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ROI Calculator Section -->
-    <section id="roi" class="py-16 bg-slate-900/40 border-y border-slate-800/80">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold mb-3">Wie viel Zeit & Geld spart OfficeFlow AI?</h2>
-                <p class="text-slate-400 text-sm">Berechnen Sie Ihr individuelles Ersparnispotenzial pro Monat:</p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-2xl text-left grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-xl">
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-2">
-                            <span class="text-slate-400">Anfragen pro Woche:</span>
-                            <span id="roi-inquiries-val" class="text-brand-400 text-sm font-bold">50</span>
-                        </div>
-                        <input type="range" id="roi-inquiries" min="10" max="300" value="50" step="5" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold mb-2">
-                            <span class="text-slate-400">Stundenlohn im Büro (€):</span>
-                            <span id="roi-wage-val" class="text-brand-400 text-sm font-bold">35 €</span>
-                        </div>
-                        <input type="range" id="roi-wage" min="20" max="100" value="35" step="5" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950 h-2 rounded-lg cursor-pointer">
-                    </div>
-
-                    <p class="text-[11px] text-slate-500 italic">* Basiert auf einer durchschnittlichen Ersparnis von ca. 12 Minuten Bearbeitungszeit pro qualifizierter Anfrage.</p>
-                </div>
-
-                <div class="bg-slate-950 p-6 rounded-xl border border-slate-800 text-center flex flex-col justify-center items-center">
-                    <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">Ihre geschätzte Ersparnis</span>
-                    <span id="roi-result" class="text-4xl font-extrabold text-emerald-400 mb-1">700 €</span>
-                    <span class="text-xs text-slate-400">pro Monat</span>
-                    <div class="w-full border-t border-slate-800 my-4"></div>
-                    <span id="roi-hours" class="text-xs font-medium text-brand-400">~ 20 Arbeitsstunden eingespart</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Table Section -->
-    <section id="preise" class="py-20 max-w-5xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-3">Transparente Preise für Ihr Büro</h2>
-            <p class="text-slate-400 text-sm">Keine versteckten Kosten. Jederzeit monatlich kündbar.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Starter Plan -->
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+            <div class="bg-slate-900/70 border border-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
                 <div>
-                    <h3 class="font-bold text-lg mb-1">Starter</h3>
-                    <p class="text-xs text-slate-400 mb-4">Ideal für Einzelunternehmer</p>
-                    <div class="text-3xl font-extrabold mb-6">49 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
-                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Bis zu 200 Anfragen / Mon.
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            E-Mail KI-Assistent
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Standard-Support
-                        </li>
+                    <h3 class="font-bold text-xl mb-1">Starter</h3>
+                    <p class="text-xs text-slate-400 mb-6">Ideal für Einzelunternehmer</p>
+                    <div class="text-4xl font-extrabold mb-6">49 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
+                    <ul class="text-xs space-y-3.5 text-slate-300 mb-8">
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Bis zu 200 Anfragen / Mon.</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> E-Mail KI-Assistent</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Standard-Support</li>
                     </ul>
                 </div>
-                <button type="button" onclick="openPlanModal('Starter (49 €/Monat)')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-semibold transition active:scale-95">Paket wählen</button>
+                <button type="button" onclick="alert('Starter-Plan ausgewählt!')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-semibold transition border border-slate-700/50">Paket wählen</button>
             </div>
 
-            <!-- Professional Plan -->
-            <div class="bg-slate-900 border-2 border-brand-500 p-6 rounded-2xl flex flex-col justify-between relative shadow-xl shadow-brand-500/10">
-                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full">Beliebt</span>
+            <!-- Professional Plan (Featured) -->
+            <div class="bg-slate-900 border-2 border-brand-500 p-8 rounded-2xl flex flex-col justify-between relative shadow-2xl shadow-brand-500/15">
+                <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-brand-600 to-accent-500 text-white text-[10px] uppercase font-bold px-4 py-1 rounded-full shadow-md">Beliebt</span>
                 <div>
-                    <h3 class="font-bold text-lg mb-1">Professional</h3>
-                    <p class="text-xs text-slate-400 mb-4">Für kleine & mittlere Betriebe</p>
-                    <div class="text-3xl font-extrabold mb-6">129 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
-                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Unbegrenzte Anfragen
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            E-Mail & WhatsApp Integration
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Lexoffice Integration
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Prioritäts-Support
-                        </li>
+                    <h3 class="font-bold text-xl mb-1">Professional</h3>
+                    <p class="text-xs text-slate-400 mb-6">Für kleine & mittlere Betriebe</p>
+                    <div class="text-4xl font-extrabold mb-6">129 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
+                    <ul class="text-xs space-y-3.5 text-slate-300 mb-8">
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Unbegrenzte Anfragen</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> E-Mail & WhatsApp Integration</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Lexoffice Integration</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Prioritäts-Support</li>
                     </ul>
                 </div>
-                <button type="button" onclick="openPlanModal('Professional (129 €/Monat)')" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-3 rounded-xl text-xs font-semibold transition active:scale-95 shadow-lg shadow-brand-600/25">Jetzt starten</button>
+                <button type="button" onclick="alert('Professional-Plan ausgewählt!')" class="w-full bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-500 hover:to-brand-600 text-white py-3 rounded-xl text-xs font-semibold transition shadow-lg shadow-brand-600/25">Jetzt starten</button>
             </div>
 
             <!-- Done-for-You Plan -->
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
+            <div class="bg-slate-900/70 border border-slate-800/80 p-8 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition">
                 <div>
-                    <h3 class="font-bold text-lg mb-1">Done-for-You</h3>
-                    <p class="text-xs text-slate-400 mb-4">Komplette Einrichtung durch uns</p>
-                    <div class="text-3xl font-extrabold mb-6">Auf Anfrage</div>
-                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Maßgeschneiderte KI-Modelle
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Persönlicher Ansprechpartner
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            Vor-Ort Schulung & Setup
-                        </li>
+                    <h3 class="font-bold text-xl mb-1">Done-for-You</h3>
+                    <p class="text-xs text-slate-400 mb-6">Komplette Einrichtung durch uns</p>
+                    <div class="text-4xl font-extrabold mb-6">Auf Anfrage</div>
+                    <ul class="text-xs space-y-3.5 text-slate-300 mb-8">
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Maßgeschneiderte KI-Modelle</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Persönlicher Ansprechpartner</li>
+                        <li class="flex items-center gap-2.5"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Vor-Ort Schulung</li>
                     </ul>
                 </div>
-                <button type="button" onclick="openPlanModal('Done-for-You (Maßgeschneidert)')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-semibold transition active:scale-95">Anfragen</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Contact Form Section -->
-    <section id="kontakt" class="py-16 max-w-3xl mx-auto px-4 w-full">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 sm:p-10 shadow-2xl">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold mb-2">Sprechen Sie mit unseren KI-Experten</h2>
-                <p class="text-slate-400 text-xs sm:text-sm">Haben Sie Fragen oder wünschen Sie eine individuelle Beratung? Schreiben Sie uns.</p>
-            </div>
-
-            <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label for="contact-name" class="block text-xs font-medium text-slate-400 mb-1">Ihr Name *</label>
-                        <input type="text" id="contact-name" required placeholder="Max Mustermann" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition">
-                    </div>
-                    <div>
-                        <label for="contact-email" class="block text-xs font-medium text-slate-400 mb-1">E-Mail-Adresse *</label>
-                        <input type="email" id="contact-email" required placeholder="max@unternehmen.de" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition">
-                    </div>
-                </div>
-
-                <div>
-                    <label for="contact-msg" class="block text-xs font-medium text-slate-400 mb-1">Ihre Nachricht *</label>
-                    <textarea id="contact-msg" rows="4" required placeholder="Wie kann OfficeFlow AI Ihrem Betrieb helfen?" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none"></textarea>
-                </div>
-
-                <button type="submit" id="contact-btn" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-3.5 rounded-xl font-semibold text-sm transition shadow-lg shadow-brand-600/20 active:scale-95 flex items-center justify-center space-x-2">
-                    <span>Nachricht absenden</span>
-                </button>
-            </form>
-
-            <div id="contact-success" class="hidden text-center p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm mt-4">
-                ✓ Vielen Dank! Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns in Kürze.
+                <button type="button" onclick="alert('Vielen Dank! Wir kontaktieren Sie bezüglich Done-for-You.')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-3 rounded-xl text-xs font-semibold transition border border-slate-700/50">Kontaktieren</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500 mt-12">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p>© 2026 OfficeFlow AI - Der KI-Mitarbeiter für Ihr Büro.</p>
-            <div class="flex space-x-6 text-slate-400">
-                <a href="#" class="hover:text-white transition">Datenschutz</a>
-                <a href="#" class="hover:text-white transition">Impressum</a>
-                <a href="#" class="hover:text-white transition">AGB</a>
-            </div>
-        </div>
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-10 text-center text-xs text-slate-500">
+        <p>© 2026 OfficeFlow AI - Der KI-Mitarbeiter für Ihr Büro. Alle Rechte vorbehalten.</p>
     </footer>
 
-    <!-- Plan Selector Modal -->
-    <div id="plan-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 text-left relative shadow-2xl">
-            <h3 class="text-xl font-bold mb-2">Paket ausgewählt</h3>
-            <p class="text-xs text-slate-400 mb-4">Sie haben das Paket <span id="modal-plan-name" class="text-brand-400 font-bold"></span> gewählt.</p>
-            
-            <div class="space-y-3">
-                <label class="block text-xs text-slate-400">Geben Sie Ihre E-Mail für die Freischaltung ein:</label>
-                <input type="email" id="modal-email" placeholder="ihre.email@firma.de" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500">
-                <button type="button" onclick="confirmPlanChoice()" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-3 rounded-lg font-semibold text-sm transition">Jetzt verbindlich anfragen</button>
-                <button type="button" onclick="closePlanModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 py-2.5 rounded-lg text-xs font-semibold transition">Abbrechen</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript Application Logic -->
+    <!-- Scripts -->
     <script>
-        // Preset Industry Scenarios
-        const presets = {
-            service: {
-                text: "Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!",
-                cat: "Service / Notdienst",
-                val: "350 € - 750 €",
-                reply: '"Hallo! Wir haben Ihren Wasserleitungs-Notfall mit Priorität erfasst. Ein Techniker meldet sich in Kürze unter Ihrer Rufnummer zur sofortigen Terminabstimmung."'
-            },
-            craft: {
-                text: "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!",
-                cat: "Handwerk / Sanitär Notdienst",
-                val: "450 € - 950 €",
-                reply: '"Hallo! Ein Sanitär-Techniker wurde umgehend verständigt. Wir melden uns in maximal 15 Minuten zur Notfall-Terminabsprache bei Ihnen."'
-            },
-            agency: {
-                text: "Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?",
-                cat: "Digitalagentur / Neukunde",
-                val: "12.000 € - 18.000 €",
-                reply: '"Hallo! Vielen Dank für die Anfrage. Wir haben freie Kapazitäten für Ihr E-Commerce-Projekt und senden Ihnen direkt unseren Kalenderlink für ein Erstgespräch."'
-            },
-            realestate: {
-                text: "Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?",
-                cat: "Immobilien / Besichtigung",
-                val: "1.200 € / Monat (Miete)",
-                reply: '"Guten Tag! Vielen Dank für Ihr Interesse an der 3-Zimmer-Wohnung. Gerne bieten wir Ihnen nächste Woche am Dienstag um 16:00 Uhr einen Besichtigungstermin an. Passt Ihnen das?"'
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.lucide) {
+                lucide.createIcons();
             }
-        };
+        });
 
-        // Select Preset Industry
-        function selectPreset(type) {
-            const btnService = document.getElementById('preset-service');
-            const btnCraft = document.getElementById('preset-craft');
-            const btnAgency = document.getElementById('preset-agency');
-            const btnRealestate = document.getElementById('preset-realestate');
-            const inputArea = document.getElementById('sample-input');
+        function setIndustry(type) {
+            const btnService = document.getElementById('btn-service');
+            const btnCraft = document.getElementById('btn-craft');
+            const btnAgency = document.getElementById('btn-agency');
+            const btnRealestate = document.getElementById('btn-realestate');
+            const input = document.getElementById('sample-input');
 
-            const inactiveClass = 'px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-slate-800 text-slate-300 hover:bg-slate-700';
-            const activeClass = 'px-3.5 py-2 rounded-lg text-xs font-semibold transition bg-brand-600 text-white shadow-md shadow-brand-600/30';
+            const inactiveClass = 'px-3.5 py-1.5 rounded-md text-xs font-semibold transition bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700/50';
+            const activeClass = 'px-3.5 py-1.5 rounded-md text-xs font-semibold transition bg-gradient-to-r from-brand-600 to-brand-700 text-white shadow-md border border-brand-500/30';
 
             [btnService, btnCraft, btnAgency, btnRealestate].forEach(btn => {
-                if(btn) btn.className = inactiveClass;
+                if (btn) btn.className = inactiveClass;
             });
 
-            if (type === 'service' && btnService) btnService.className = activeClass;
-            if (type === 'craft' && btnCraft) btnCraft.className = activeClass;
-            if (type === 'agency' && btnAgency) btnAgency.className = activeClass;
-            if (type === 'realestate' && btnRealestate) btnRealestate.className = activeClass;
-
-            if (presets[type]) {
-                inputArea.value = presets[type].text;
+            if (type === 'craft') {
+                if (btnCraft) btnCraft.className = activeClass;
+                input.value = "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!";
+            } else if (type === 'agency') {
+                if (btnAgency) btnAgency.className = activeClass;
+                input.value = "Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?";
+            } else if (type === 'realestate') {
+                if (btnRealestate) btnRealestate.className = activeClass;
+                input.value = "Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?";
+            } else {
+                if (btnService) btnService.className = activeClass;
+                input.value = "Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!";
             }
 
-            executeAnalysis();
+            runSimulation();
         }
 
-        // Run Analysis Logic
-        function executeAnalysis() {
+        function runSimulation() {
             const inputVal = document.getElementById('sample-input').value.trim();
-            const resCat = document.getElementById('res-cat');
-            const resVal = document.getElementById('res-val');
-            const resReply = document.getElementById('res-reply');
-            const loadingOverlay = document.getElementById('loading-overlay');
+            const reply = document.getElementById('res-reply');
+            const val = document.getElementById('res-val');
+            const cat = document.getElementById('res-cat');
+            const btnText = document.getElementById('btn-text');
 
             if (!inputVal) {
-                alert("Bitte geben Sie einen Anfragetext ein.");
+                alert("Bitte geben Sie eine Nachricht ein.");
                 return;
             }
 
-            loadingOverlay.classList.remove('hidden');
+            btnText.innerText = "KI analysiert...";
 
             setTimeout(() => {
-                const text = inputVal.toLowerCase();
-
-                let category = "Büroservice / Allgemein";
-                let estValue = "300 € - 800 €";
-                let replyText = '"Vielen Dank für Ihre Nachricht. Wir haben Ihre Anfrage erhalten und bearbeiten diese umgehend."';
-
-                if (text.includes("rohrbruch") || text.includes("wasser") || text.includes("bad") || text.includes("leckt")) {
-                    category = "Handwerk / Sanitär Notdienst";
-                    estValue = "450 € - 950 €";
-                    replyText = '"Hallo! Ihr Sanitär-Notfall wurde registriert. Unser Notdienst wurde benachrichtigt und ruft Sie innerhalb von 15 Minuten zurück."';
-                } else if (text.includes("rebranding") || text.includes("agentur") || text.includes("budget") || text.includes("webseite") || text.includes("e-commerce")) {
-                    category = "Digitalagentur / Neukunde";
-                    estValue = "10.000 € - 20.000 €";
-                    replyText = '"Hallo! Vielen Dank für die Anfrage bezüglich des Relaunchs. Wir haben für Ihr Projekt freie Kapazitäten. Wann passt Ihnen ein kurzes Telefonat?"';
-                } else if (text.includes("wohnung") || text.includes("besichtigung") || text.includes("hauptstraße") || text.includes("miete")) {
-                    category = "Immobilien / Besichtigung";
-                    estValue = "1.200 € / Monat";
-                    replyText = '"Guten Tag! Vielen Dank für Ihr Interesse an der Wohnung. Ein Besichtigungstermin ist am nächsten Dienstag um 16:00 Uhr frei. Passt Ihnen das?"';
-                } else if (text.includes("angebot") || text.includes("preis") || text.includes("kosten")) {
-                    category = "Vertrieb / Angebot";
-                    estValue = "1.500 € - 5.000 €";
-                    replyText = '"Vielen Dank für Ihre Anfrage! Wir erstellen Ihnen gerne ein individuelles Angebot. Können Sie uns kurz noch die Details zusenden?"';
+                const lower = inputVal.toLowerCase();
+                
+                if (lower.includes("rohrbruch") || lower.includes("wasser") || lower.includes("notfall") || lower.includes("leckt")) {
+                    cat.innerText = "Handwerk / Sanitär Notdienst";
+                    val.innerText = "450 € - 950 €";
+                    reply.innerText = '"Hallo! Ein Techniker wurde sofort verständigt. Wir melden uns in max. 15 Minuten zur Notfall-Terminabsprache."';
+                } else if (lower.includes("rebranding") || lower.includes("agentur") || lower.includes("budget") || lower.includes("webseite")) {
+                    cat.innerText = "Digitalagentur / Neukunde";
+                    val.innerText = "12.000 € - 18.000 €";
+                    reply.innerText = '"Hallo! Vielen Dank für das spannende Projekt. Wir haben passende Kapazitäten und senden Ihnen direkt unseren Kalenderlink für ein Erstgespräch."';
+                } else if (lower.includes("wohnung") || lower.includes("besichtigung") || lower.includes("miete") || lower.includes("hauptstraße")) {
+                    cat.innerText = "Immobilien / Besichtigung";
+                    val.innerText = "1.200 € / Monat";
+                    reply.innerText = '"Guten Tag! Vielen Dank für Ihr Interesse an der Wohnung. Wir bieten Ihnen nächsten Dienstag um 16:00 Uhr einen Besichtigungstermin an."';
+                } else {
+                    cat.innerText = "Büroservice / Allgemein";
+                    val.innerText = "350 € - 800 €";
+                    reply.innerText = '"Vielen Dank für Ihre Anfrage! Wir haben Ihre Nachricht registriert und bearbeiten Ihr Anliegen umgehend."';
                 }
 
-                resCat.innerText = category;
-                resVal.innerText = estValue;
-                resReply.innerText = replyText;
-
-                loadingOverlay.classList.add('hidden');
+                btnText.innerText = "Mit KI analysieren";
             }, 300);
         }
 
-        // Calculate ROI in real time
         function calculateROI() {
-            const inquiries = parseInt(document.getElementById('roi-inquiries').value);
-            const wage = parseInt(document.getElementById('roi-wage').value);
+            const inq = document.getElementById('roi-inquiries').value;
+            const wage = document.getElementById('roi-wage').value;
 
-            document.getElementById('roi-inquiries-val').innerText = inquiries;
+            document.getElementById('roi-inquiries-val').innerText = inq;
             document.getElementById('roi-wage-val').innerText = wage + ' €';
 
-            // ~12 mins per inquiry saved * 4 weeks
-            const hoursSaved = Math.round((inquiries * 4 * 12) / 60);
+            const hoursSaved = Math.round((inq * 4 * 12) / 60);
             const moneySaved = hoursSaved * wage;
 
             document.getElementById('roi-hours').innerText = `~ ${hoursSaved} Arbeitsstunden eingespart`;
             document.getElementById('roi-result').innerText = `${moneySaved.toLocaleString('de-DE')} €`;
         }
-
-        // Plan Modal Interactivity
-        function openPlanModal(planName) {
-            document.getElementById('modal-plan-name').innerText = planName;
-            document.getElementById('plan-modal').classList.remove('hidden');
-        }
-
-        function closePlanModal() {
-            document.getElementById('plan-modal').classList.add('hidden');
-        }
-
-        function confirmPlanChoice() {
-            const email = document.getElementById('modal-email').value;
-            if (!email || !email.includes('@')) {
-                alert("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
-                return;
-            }
-            alert("Vielen Dank! Wir haben Ihre Anfrage für das Paket erhalten und senden Ihnen die Zugangsdaten per E-Mail.");
-            closePlanModal();
-        }
-
-        // Contact Form Submission
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            const btn = document.getElementById('contact-btn');
-            const successMsg = document.getElementById('contact-success');
-
-            btn.innerText = "Wird gesendet...";
-            btn.disabled = true;
-
-            setTimeout(() => {
-                document.getElementById('contact-form').reset();
-                btn.innerText = "Nachricht absenden";
-                btn.disabled = false;
-                successMsg.classList.remove('hidden');
-                setTimeout(() => successMsg.classList.add('hidden'), 5000);
-            }, 600);
-        }
-
-        // Initialize defaults
-        window.onload = function() {
-            calculateROI();
-        };
     </script>
 </body>
 </html>
-```
-
-### So fügst du den Code auf GitHub ein:
-1. Öffne dein GitHub-Repository: [github.com/devopsksa/officeflow-ai](https://github.com/devopsksa/officeflow-ai)
-2. Klicke auf die Datei `index.html` und dann auf das **Stift-Icon** (`Edit this file`).
-3. Lösche den bisherigen Inhalt und füge diesen **neuen Code** ein.
-4. Klicke oben rechts auf **`Commit changes...`**. Falls eine Sicherheitsabfrage kommt, wähle **`Allow Secret`** / **`I'll fix it later`**.
