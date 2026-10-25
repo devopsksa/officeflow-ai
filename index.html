@@ -111,7 +111,7 @@
     <script>
         lucide.createIcons();
 
-        // Integrated Gemini API Key
+        // Dein integrierter Gemini API Key
         const GEMINI_API_KEY = "AQ.Ab8RN6JKMDE0Su1qZHgriUQ4p0alefh5ysaakQGkYcNKH_5_Rw";
 
         function setIndustry(type) {
@@ -122,20 +122,20 @@
             const input = document.getElementById('sample-input');
 
             [btnService, btnCraft, btnAgency, btnRealestate].forEach(btn => {
-                btn.className = 'px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white';
+                if(btn) btn.className = 'px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white';
             });
 
             if(type === 'craft') {
-                btnCraft.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnCraft) btnCraft.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!";
             } else if(type === 'agency') {
-                btnAgency.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnAgency) btnAgency.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?";
             } else if(type === 'realestate') {
-                btnRealestate.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnRealestate) btnRealestate.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?";
             } else {
-                btnService.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnService) btnService.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!";
             }
 
@@ -153,39 +153,43 @@
             cat.innerText = "KI-Prüfung läuft...";
 
             try {
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+                // Nutzung des aktuellen gemini-2.5-flash Modells
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
                 
-                const prompt = `Analysiere als professioneller Büro-KI-Assistent für deutsche Betriebe folgende Kundenanfrage: "${inputVal}". 
-                Antworte AUSSCHLIESSLICH im JSON-Format mit genau diesen drei Feldern:
-                {
-                  "category": "Kurze Kategorie (z.B. Handwerk / Notdienst)",
-                  "value": "Geschätzter Auftragswert (z.B. 450 € - 900 €)",
-                  "reply": "Höflicher, professioneller Antwortentwurf auf Deutsch für den Kunden"
-                }`;
+                const promptText = `Analysiere als KI-Büroassistent diese Kundenanfrage: "${inputVal}". 
+                Antworte AUSSCHLIESSLICH als valider JSON-String ohne Markdown. 
+                Beispiel-Struktur: {"category": "Handwerk / Notdienst", "value": "450 € - 900 €", "reply": "Hallo! Wir haben Ihre Anfrage erhalten."}`;
 
                 const res = await fetch(endpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        contents: [{ parts: [{ text: prompt }] }]
+                        contents: [{
+                            parts: [{ text: promptText }]
+                        }]
                     })
                 });
 
                 const data = await res.json();
-                const textResponse = data.candidates[0].content.parts[0].text;
                 
-                const cleanJson = textResponse.replace(/```json/g, '').replace(/```/g, '').trim();
-                const result = JSON.parse(cleanJson);
+                if (!res.ok) {
+                    throw new Error(data.error?.message || "Fehler beim API Aufruf");
+                }
 
-                cat.innerText = result.category;
-                val.innerText = result.value;
-                reply.innerText = `"${result.reply}"`;
+                let rawText = data.candidates[0].content.parts[0].text;
+                rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+                
+                const result = JSON.parse(rawText);
+
+                cat.innerText = result.category || "Allgemeine Anfrage";
+                val.innerText = result.value || "Auf Anfrage";
+                reply.innerText = `"${result.reply || rawText}"`;
 
             } catch (error) {
-                console.error("API Fehler:", error);
-                cat.innerText = "Handwerk / Service";
-                val.innerText = "300 € - 700 €";
-                reply.innerText = '"Vielen Dank für Ihre Anfrage! Wir haben Ihr Anliegen erhalten und melden uns in Kürze bei Ihnen."';
+                console.error("API Fehler Details:", error);
+                cat.innerText = "Hinweis / Fehler";
+                val.innerText = "---";
+                reply.innerText = "Fehler bei der Verbindung zur KI: " + error.message;
             }
         }
     </script>
