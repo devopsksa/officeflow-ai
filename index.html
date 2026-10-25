@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +37,12 @@
                 </div>
                 <span class="font-bold text-xl tracking-tight">OfficeFlow <span class="text-brand-500">AI</span></span>
             </div>
+            <nav class="hidden md:flex space-x-6 text-sm text-slate-400">
+                <a href="#demo" class="hover:text-white transition">KI-Demo</a>
+                <a href="#vorteile" class="hover:text-white transition">Vorteile</a>
+                <a href="#roi" class="hover:text-white transition">ROI-Rechner</a>
+                <a href="#preise" class="hover:text-white transition">Preise</a>
+            </nav>
             <a href="#demo" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-brand-600/20">
                 Demo Testen
             </a>
@@ -46,7 +52,7 @@
     <!-- Hero Section -->
     <section class="py-20 px-4 text-center max-w-4xl mx-auto">
         <div class="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-8 text-xs font-medium text-brand-500">
-            <span class="flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>Das All-in-One KI-Bürosystem für moderne Unternehmen</span>
         </div>
         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
@@ -55,50 +61,58 @@
         <p class="text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
             Verarbeitet Anfragen über WhatsApp & E-Mail in Sekundenschnelle, qualifiziert Leads, schreibt Antwortentwürfe und synchronisiert direkt mit deiner Buchhaltung.
         </p>
+        <div class="flex justify-center gap-4">
+            <a href="#demo" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center space-x-2 shadow-lg shadow-brand-600/30">
+                <span>Jetzt ausprobieren</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
     </section>
 
-    <!-- Interactive Simulator Section -->
+    <!-- Live KI-Simulator Section -->
     <section id="demo" class="max-w-5xl mx-auto px-4 pb-24">
         <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-6 sm:p-8">
             <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-800">
                 <div>
-                    <h3 class="font-semibold text-lg text-white">Live KI-Simulator</h3>
+                    <h3 class="font-semibold text-lg text-white flex items-center gap-2">
+                        <i data-lucide="sparkles" class="text-brand-500 w-5 h-5"></i> Live KI-Simulator
+                    </h3>
                     <p class="text-xs text-slate-400">Wähle ein Szenario aus oder tippe eine eigene Nachricht ein:</p>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    <button id="btn-service" onclick="setIndustry('service')" class="px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow">Dienstleister</button>
-                    <button id="btn-craft" onclick="setIndustry('craft')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Handwerk & Bau</button>
-                    <button id="btn-agency" onclick="setIndustry('agency')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Agenturen</button>
-                    <button id="btn-realestate" onclick="setIndustry('realestate')" class="px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white">Immobilien</button>
+                    <button id="btn-service" onclick="setIndustry('service')" class="px-3 py-1.5 rounded-md text-xs font-medium transition bg-slate-800 text-slate-300 hover:text-white">Dienstleister</button>
+                    <button id="btn-craft" onclick="setIndustry('craft')" class="px-3 py-1.5 rounded-md text-xs font-medium transition bg-slate-800 text-slate-300 hover:text-white">Handwerk & Bau</button>
+                    <button id="btn-agency" onclick="setIndustry('agency')" class="px-3 py-1.5 rounded-md text-xs font-medium transition bg-slate-800 text-slate-300 hover:text-white">Agenturen</button>
+                    <button id="btn-realestate" onclick="setIndustry('realestate')" class="px-3 py-1.5 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow">Immobilien</button>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Input Box -->
+                <!-- Eingabe -->
                 <div class="flex flex-col">
                     <label class="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Eingehende Kundenanfrage:</label>
-                    <textarea id="sample-input" rows="5" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none">Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!</textarea>
-                    <button onclick="runSimulation()" class="mt-4 bg-brand-600 hover:bg-brand-500 text-white py-2.5 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2">
+                    <textarea id="sample-input" rows="6" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none">Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?</textarea>
+                    <button id="analyze-btn" onclick="runSimulation()" class="mt-4 bg-brand-600 hover:bg-brand-500 text-white py-3 rounded-lg text-sm font-semibold transition flex items-center justify-center space-x-2 shadow-lg shadow-brand-600/20">
                         <i data-lucide="sparkles" class="w-4 h-4"></i>
                         <span>Mit KI analysieren</span>
                     </button>
                 </div>
 
-                <!-- Output Box -->
-                <div class="bg-slate-950 border border-slate-800 rounded-lg p-4 flex flex-col justify-between">
+                <!-- Ausgabe -->
+                <div class="bg-slate-950 border border-slate-800 rounded-lg p-5 flex flex-col justify-between">
                     <div>
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">KI-Analyse Ergebnis</span>
-                            <span id="res-cat" class="text-xs bg-brand-500/10 text-brand-500 px-2 py-1 rounded-md border border-brand-500/20">Handwerk / Notdienst</span>
+                            <span id="res-cat" class="text-xs bg-brand-500/10 text-brand-500 px-2.5 py-1 rounded-md border border-brand-500/20 font-medium">Immobilien / Besichtigung</span>
                         </div>
                         <div class="mb-4">
-                            <span class="text-xs text-slate-500 block">Geschätzter Wert:</span>
-                            <span id="res-val" class="text-lg font-bold text-emerald-400">450 € - 900 €</span>
+                            <span class="text-xs text-slate-500 block mb-1">Geschätzter Wert:</span>
+                            <span id="res-val" class="text-xl font-bold text-emerald-400">1.200 € / Monat (Miete)</span>
                         </div>
                         <div>
-                            <span class="text-xs text-slate-500 block mb-1">Automatisch erstellte Antwort:</span>
-                            <p id="res-reply" class="text-xs text-slate-300 italic bg-slate-900/80 p-3 rounded border border-slate-800/80 leading-relaxed">
-                                "Hallo! Vielen Dank für Ihre Nachricht. Ein Techniker wurde benachrichtigt und meldet sich innerhalb von 15 Minuten bei Ihnen zur Terminabsprache."
+                            <span class="text-xs text-slate-500 block mb-2">Automatisch erstellte Antwort:</span>
+                            <p id="res-reply" class="text-xs text-slate-300 italic bg-slate-900/90 p-3.5 rounded-lg border border-slate-800 leading-relaxed">
+                                "Guten Tag! Vielen Dank für Ihr Interesse an der 3-Zimmer-Wohnung. Gerne bieten wir Ihnen nächste Woche am Dienstag um 16:00 Uhr einen Besichtigungstermin an. Passt Ihnen das?"
                             </p>
                         </div>
                     </div>
@@ -107,11 +121,93 @@
         </div>
     </section>
 
+    <!-- ROI-Rechner Section -->
+    <section id="roi" class="py-16 bg-slate-900/40 border-y border-slate-800/60">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-3">Wie viel Zeit & Geld spart OfficeFlow AI?</h2>
+            <p class="text-slate-400 text-sm mb-8">Berechne dein Ersparnispotenzial pro Monat:</p>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl text-left grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div>
+                    <label class="text-xs text-slate-400 font-semibold block mb-2">Anfragen pro Woche: <span id="roi-inquiries-val" class="text-brand-500 font-bold">50</span></label>
+                    <input type="range" id="roi-inquiries" min="10" max="200" value="50" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950">
+                    
+                    <label class="text-xs text-slate-400 font-semibold block mt-4 mb-2">Stundenlohn im Büro (€): <span id="roi-wage-val" class="text-brand-500 font-bold">35 €</span></label>
+                    <input type="range" id="roi-wage" min="20" max="80" value="35" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950">
+                </div>
+                <div class="bg-slate-950 p-5 rounded-lg border border-slate-800 text-center">
+                    <span class="text-xs text-slate-400 block mb-1">Monatliche Ersparnis</span>
+                    <span id="roi-result" class="text-3xl font-extrabold text-emerald-400 block">700 €</span>
+                    <span id="roi-hours" class="text-xs text-slate-400 block mt-2">~ 20 Arbeitsstunden eingespart</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Preisübersicht Section -->
+    <section id="preise" class="py-20 max-w-5xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-3">Transparente Preise für Ihr Büro</h2>
+            <p class="text-slate-400 text-sm">Keine versteckten Kosten. Jederzeit kündbar.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Starter</h3>
+                    <p class="text-xs text-slate-400 mb-4">Ideal für Einzelunternehmer</p>
+                    <div class="text-3xl font-bold mb-6">49 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
+                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Bis zu 200 Anfragen / Mon.</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> E-Mail KI-Assistent</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Standard-Support</li>
+                    </ul>
+                </div>
+                <button onclick="alert('Starter-Plan ausgewählt!')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs font-semibold transition">Paket wählen</button>
+            </div>
+
+            <div class="bg-slate-900 border-2 border-brand-500 p-6 rounded-xl flex flex-col justify-between relative shadow-xl shadow-brand-500/10">
+                <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] uppercase font-bold px-3 py-1 rounded-full">Beliebt</span>
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Professional</h3>
+                    <p class="text-xs text-slate-400 mb-4">Für kleine & mittlere Betriebe</p>
+                    <div class="text-3xl font-bold mb-6">129 € <span class="text-xs text-slate-500 font-normal">/ Monat</span></div>
+                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Unbegrenzte Anfragen</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> E-Mail & WhatsApp Integration</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Lexoffice & SevDesk Anbindung</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Prioritäts-Support</li>
+                    </ul>
+                </div>
+                <button onclick="alert('Professional-Plan ausgewählt!')" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-2 rounded-lg text-xs font-semibold transition">Jetzt starten</button>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl flex flex-col justify-between">
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Enterprise / Done-for-You</h3>
+                    <p class="text-xs text-slate-400 mb-4">Komplette Einrichtung durch uns</p>
+                    <div class="text-3xl font-bold mb-6">Auf Anfrage</div>
+                    <ul class="text-xs space-y-3 text-slate-300 mb-6">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Maßgeschneiderte KI-Modelle</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Persönlicher Ansprechpartner</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> Vor-Ort Schulung</li>
+                    </ul>
+                </div>
+                <button onclick="alert('Vielen Dank! Wir kontaktieren Sie bezüglich Done-for-You.')" class="w-full bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs font-semibold transition">Kontaktieren</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500">
+        <p>© 2026 OfficeFlow AI - Der KI-Mitarbeiter für Ihr Büro. Alle Rechte vorbehalten.</p>
+    </footer>
+
     <!-- Scripts -->
     <script>
         lucide.createIcons();
 
-        // Dein integrierter Gemini API Key
+        // Integrated Gemini API Key
         const GEMINI_API_KEY = "AQ.Ab8RN6JKMDE0Su1qZHgriUQ4p0alefh5ysaakQGkYcNKH_5_Rw";
 
         function setIndustry(type) {
@@ -122,76 +218,17 @@
             const input = document.getElementById('sample-input');
 
             [btnService, btnCraft, btnAgency, btnRealestate].forEach(btn => {
-                if(btn) btn.className = 'px-3 py-1 rounded-md text-xs font-medium transition text-slate-400 hover:text-white';
+                if(btn) btn.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition bg-slate-800 text-slate-300 hover:text-white';
             });
 
             if(type === 'craft') {
-                if(btnCraft) btnCraft.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnCraft) btnCraft.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!";
             } else if(type === 'agency') {
-                if(btnAgency) btnAgency.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnAgency) btnAgency.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?";
             } else if(type === 'realestate') {
-                if(btnRealestate) btnRealestate.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
+                if(btnRealestate) btnRealestate.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
                 input.value = "Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?";
             } else {
-                if(btnService) btnService.className = 'px-3 py-1 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
-                input.value = "Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!";
-            }
-
-            runSimulation();
-        }
-
-        async function runSimulation() {
-            const inputVal = document.getElementById('sample-input').value;
-            const reply = document.getElementById('res-reply');
-            const val = document.getElementById('res-val');
-            const cat = document.getElementById('res-cat');
-
-            reply.innerText = "KI analysiert Anfrage in Echtzeit...";
-            val.innerText = "Berechne...";
-            cat.innerText = "KI-Prüfung läuft...";
-
-            try {
-                // Nutzung des aktuellen gemini-2.5-flash Modells
-                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`;
-                
-                const promptText = `Analysiere als KI-Büroassistent diese Kundenanfrage: "${inputVal}". 
-                Antworte AUSSCHLIESSLICH als valider JSON-String ohne Markdown. 
-                Beispiel-Struktur: {"category": "Handwerk / Notdienst", "value": "450 € - 900 €", "reply": "Hallo! Wir haben Ihre Anfrage erhalten."}`;
-
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{ text: promptText }]
-                        }]
-                    })
-                });
-
-                const data = await res.json();
-                
-                if (!res.ok) {
-                    throw new Error(data.error?.message || "Fehler beim API Aufruf");
-                }
-
-                let rawText = data.candidates[0].content.parts[0].text;
-                rawText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
-                
-                const result = JSON.parse(rawText);
-
-                cat.innerText = result.category || "Allgemeine Anfrage";
-                val.innerText = result.value || "Auf Anfrage";
-                reply.innerText = `"${result.reply || rawText}"`;
-
-            } catch (error) {
-                console.error("API Fehler Details:", error);
-                cat.innerText = "Hinweis / Fehler";
-                val.innerText = "---";
-                reply.innerText = "Fehler bei der Verbindung zur KI: " + error.message;
-            }
-        }
-    </script>
-</body>
-</html>
+                if(btnService) btnService.className = 'px-3 py-1.5 rounded-md text-xs font-medium transition bg-brand-600 text-white shadow';
