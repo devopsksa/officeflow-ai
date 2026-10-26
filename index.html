@@ -1,556 +1,312 @@
 <!DOCTYPE html>
-<html lang="de" class="dark">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURION - Business Automation System</title>
+    <title>OfficeFlow AI - B2B SaaS Live-Dashboard</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        darkbg: '#050b14',
-                        cardbg: '#0b1329',
-                        bordercol: '#1e293b',
-                        neoncyan: '#22d3ee',
-                        neonpurple: '#8b5cf6',
+                        nordic: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#080d1a',
+                        },
+                        brand: {
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        }
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-darkbg text-slate-100 font-sans min-h-screen selection:bg-neonpurple selection:text-white">
+<body class="bg-nordic-950 text-slate-100 font-sans min-h-screen selection:bg-brand-500 selection:text-white">
 
-    <!-- Top Navigation / Header -->
-    <header class="border-b border-bordercol bg-cardbg/80 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-[1600px] mx-auto px-4 h-16 flex items-center justify-between">
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-nordic-900/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-tr from-neonpurple to-neoncyan p-2 rounded-xl text-white shadow-lg shadow-neonpurple/30">
-                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                <div class="bg-brand-600 p-2 rounded-xl text-white shadow-lg shadow-brand-600/20">
+                    <i data-lucide="zap" class="w-5 h-5"></i>
                 </div>
-                <div>
-                    <span class="font-black text-xl tracking-widest text-white block leading-none">FUTURION</span>
-                    <span class="text-[9px] uppercase tracking-widest text-slate-400">Business Automation System</span>
-                </div>
+                <span class="font-bold text-xl tracking-tight text-white">OfficeFlow <span class="text-brand-500">AI</span></span>
+                <span class="bg-slate-800 text-slate-300 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-700">B2B SaaS</span>
             </div>
 
-            <div class="flex items-center space-x-4">
-                <div class="hidden sm:flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full text-xs text-emerald-400 font-medium">
+            <div class="hidden sm:flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-lg p-1 text-xs">
+                <span class="text-slate-400 px-2 font-medium">Profil:</span>
+                <button type="button" onclick="setIndustry('service')" id="btn-service" class="px-3 py-1 rounded-md text-slate-300 hover:text-white transition">Dienstleister</button>
+                <button type="button" onclick="setIndustry('craft')" id="btn-craft" class="px-3 py-1 rounded-md text-slate-300 hover:text-white transition">Handwerk & Bau</button>
+                <button type="button" onclick="setIndustry('agency')" id="btn-agency" class="px-3 py-1 rounded-md bg-brand-600 text-white font-semibold transition">Agenturen</button>
+                <button type="button" onclick="setIndustry('realestate')" id="btn-realestate" class="px-3 py-1 rounded-md text-slate-300 hover:text-white transition">Immobilien</button>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center space-x-1.5 bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>System Online</span>
-                </div>
-                <div class="flex items-center space-x-2 border-l border-bordercol pl-4">
-                    <div class="w-8 h-8 rounded-full bg-neonpurple/20 border border-neonpurple/50 flex items-center justify-center font-bold text-xs text-neoncyan">AM</div>
-                    <div class="text-left">
-                        <span class="text-xs font-bold block text-white">Alex Morgan</span>
-                        <span class="text-[10px] text-slate-400 block">Business Owner</span>
-                    </div>
-                </div>
+                    <span>KI System Bereit</span>
+                </span>
+                <button type="button" onclick="alert('Demo wird gestartet...')" class="bg-white text-nordic-900 hover:bg-slate-100 px-4 py-2 rounded-lg text-xs font-bold transition shadow">
+                    Demo Testen
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Dashboard Layout -->
-    <main class="max-w-[1600px] mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         
-        <!-- LEFT SIDEBAR (Menu) -->
-        <aside class="lg:col-span-2 space-y-1 bg-cardbg border border-bordercol rounded-2xl p-4 sticky top-24">
-            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mb-2 block">Menu</span>
-            
-            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-neonpurple/20 text-neoncyan border border-neonpurple/40 transition">
-                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                <span>Dashboard</span>
-            </button>
-            <button onclick="switchTab('workflows')" id="nav-workflows" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="git-branch" class="w-4 h-4"></i>
-                <span>Workflows</span>
-            </button>
-            <button onclick="switchTab('crm')" id="nav-crm" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="users" class="w-4 h-4"></i>
-                <span>CRM</span>
-            </button>
-            <button onclick="switchTab('leads')" id="nav-leads" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="user-plus" class="w-4 h-4"></i>
-                <span>Leads</span>
-            </button>
-            <button onclick="switchTab('tasks')" id="nav-tasks" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="check-square" class="w-4 h-4"></i>
-                <span>Tasks</span>
-            </button>
-            <button onclick="switchTab('ai')" id="nav-ai" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="bot" class="w-4 h-4"></i>
-                <span>AI Agents</span>
-            </button>
-            <button onclick="switchTab('campaigns')" id="nav-campaigns" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                <span>Campaigns</span>
-            </button>
-            <button onclick="switchTab('analytics')" id="nav-analytics" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                <span>Analytics</span>
-            </button>
-            <button onclick="switchTab('integrations')" id="nav-integrations" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="puzzle" class="w-4 h-4"></i>
-                <span>Integrations</span>
-            </button>
-            <button onclick="switchTab('settings')" id="nav-settings" class="sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
-                <i data-lucide="settings" class="w-4 h-4"></i>
-                <span>Settings</span>
-            </button>
-        </aside>
-
-        <!-- CENTER CONTENT AREA -->
-        <div class="lg:col-span-7 space-y-6">
-
-            <!-- TAB 1: DASHBOARD (Der vollständige Workflow & Analytics aus dem Bild) -->
-            <div id="tab-dashboard" class="tab-content space-y-6">
-                
-                <!-- WORKFLOW AUTOMATION DIAGRAMM (Zentrales Bild-Layout) -->
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6 relative overflow-hidden shadow-2xl">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                            <i data-lucide="git-branch" class="w-4 h-4 text-neoncyan"></i> AI Workflow Engine
-                        </h2>
-                        <span class="text-xs bg-neonpurple/20 text-neoncyan px-3 py-1 rounded-full border border-neonpurple/40 font-bold">Live aktiv</span>
-                    </div>
-
-                    <!-- Trigger Cards Oben -->
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                        <div class="bg-slate-900/90 border border-slate-700/80 p-3 rounded-xl text-center shadow">
-                            <i data-lucide="user-check" class="w-5 h-5 mx-auto text-neoncyan mb-1"></i>
-                            <span class="text-[11px] font-bold block text-white">New Lead</span>
-                            <span class="text-[9px] text-slate-400 block">Form Submitted</span>
-                        </div>
-                        <div class="bg-slate-900/90 border border-slate-700/80 p-3 rounded-xl text-center shadow">
-                            <i data-lucide="message-square" class="w-5 h-5 mx-auto text-emerald-400 mb-1"></i>
-                            <span class="text-[11px] font-bold block text-white">WhatsApp</span>
-                            <span class="text-[9px] text-slate-400 block">Message Received</span>
-                        </div>
-                        <div class="bg-slate-900/90 border border-slate-700/80 p-3 rounded-xl text-center shadow">
-                            <i data-lucide="mail" class="w-5 h-5 mx-auto text-amber-400 mb-1"></i>
-                            <span class="text-[11px] font-bold block text-white">Email</span>
-                            <span class="text-[9px] text-slate-400 block">Email Received</span>
-                        </div>
-                        <div class="bg-slate-900/90 border border-slate-700/80 p-3 rounded-xl text-center shadow">
-                            <i data-lucide="webhook" class="w-5 h-5 mx-auto text-neonpurple mb-1"></i>
-                            <span class="text-[11px] font-bold block text-white">API / Webhook</span>
-                            <span class="text-[9px] text-slate-400 block">Data Received</span>
-                        </div>
-                    </div>
-
-                    <!-- AI Engine Core -->
-                    <div class="my-6 p-5 bg-gradient-to-b from-indigo-950/50 to-slate-950 border border-neonpurple/50 rounded-2xl text-center relative shadow-lg">
-                        <div class="w-12 h-12 rounded-full bg-neonpurple/20 border border-neonpurple flex items-center justify-center mx-auto mb-2 text-neoncyan shadow-lg shadow-neonpurple/50">
-                            <i data-lucide="brain" class="w-6 h-6 animate-pulse"></i>
-                        </div>
-                        <h3 class="font-black text-white text-sm">AI ENGINE</h3>
-                        <span class="text-[10px] text-neoncyan tracking-wider uppercase block">Smart Decision Core</span>
-
-                        <!-- Lead Score Verzweigung -->
-                        <div class="mt-4 pt-4 border-t border-slate-800 flex flex-col items-center">
-                            <span class="text-xs font-bold text-slate-300 mb-2">Lead Score: Is this a Hot Lead?</span>
-                            <div class="flex items-center gap-6">
-                                <div class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full text-xs font-bold">YES</div>
-                                <div class="bg-rose-500/20 text-rose-400 border border-rose-500/40 px-3 py-1 rounded-full text-xs font-bold">NO</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Aktionen Unten (Zwei Spalten) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Yes Zweig -->
-                        <div class="space-y-3 bg-emerald-950/20 border border-emerald-500/30 p-4 rounded-xl">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-400 block mb-1">Hot Lead Aktionen (Yes)</span>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="dollar-sign" class="text-emerald-400 w-4 h-4"></i>
-                                <span>Create Deal in CRM</span>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="user-check" class="text-neoncyan w-4 h-4"></i>
-                                <span>Assign Task to Sales Rep</span>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="message-square" class="text-emerald-400 w-4 h-4"></i>
-                                <span>Send WhatsApp Notification</span>
-                            </div>
-                        </div>
-
-                        <!-- No Zweig -->
-                        <div class="space-y-3 bg-rose-950/20 border border-rose-500/30 p-4 rounded-xl">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-rose-400 block mb-1">Nurture Aktionen (No)</span>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="mail" class="text-amber-400 w-4 h-4"></i>
-                                <span>Add to Nurture Campaign</span>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="mail-check" class="text-amber-400 w-4 h-4"></i>
-                                <span>Send Email Follow-up</span>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-lg flex items-center space-x-3 text-xs">
-                                <i data-lucide="clock" class="text-slate-400 w-4 h-4"></i>
-                                <span>Wait 2 Days Then Follow-up</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CRM OVERVIEW & ANALYTICS UNTEN -->
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6 space-y-6">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300">CRM Overview</h3>
-                        <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-lg">This Month ▾</span>
-                    </div>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                            <span class="text-xs text-slate-400 block mb-1">Total Leads</span>
-                            <div class="text-xl font-black text-white">2,450</div>
-                            <span class="text-[11px] text-emerald-400 font-bold">↑ +18.5%</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                            <span class="text-xs text-slate-400 block mb-1">Open Deals</span>
-                            <div class="text-xl font-black text-white">560</div>
-                            <span class="text-[11px] text-emerald-400 font-bold">↑ +12.3%</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                            <span class="text-xs text-slate-400 block mb-1">Won Deals</span>
-                            <div class="text-xl font-black text-white">210</div>
-                            <span class="text-[11px] text-emerald-400 font-bold">↑ +24.7%</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl">
-                            <span class="text-xs text-slate-400 block mb-1">Revenue</span>
-                            <div class="text-xl font-black text-emerald-400">$120,450</div>
-                            <span class="text-[11px] text-emerald-400 font-bold">↑ +28.1%</span>
-                        </div>
-                    </div>
-
-                    <!-- Diagramm Simulation -->
-                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl h-48 flex items-end justify-between px-6 pt-10">
-                        <div class="w-full flex items-end justify-between space-x-2 text-center">
-                            <div class="bg-neonpurple/30 h-16 w-12 rounded-t-lg hover:bg-neonpurple transition"></div>
-                            <div class="bg-neonpurple/50 h-24 w-12 rounded-t-lg hover:bg-neonpurple transition"></div>
-                            <div class="bg-neonpurple/40 h-20 w-12 rounded-t-lg hover:bg-neonpurple transition"></div>
-                            <div class="bg-neoncyan/40 h-32 w-12 rounded-t-lg hover:bg-neoncyan transition"></div>
-                            <div class="bg-neoncyan/70 h-36 w-12 rounded-t-lg hover:bg-neoncyan transition"></div>
-                            <div class="bg-neoncyan h-40 w-12 rounded-t-lg shadow-lg shadow-neoncyan/30"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- INTEGRATIONS LEISTE GANZ UNTEN -->
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-300 mb-4">Integrations</h3>
-                    <div class="grid grid-cols-2 sm:grid-cols-6 gap-3 text-center">
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-emerald-400 block">WhatsApp</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-amber-400 block">Gmail</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-blue-400 block">CRM</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-emerald-400 block">Google Sheets</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-amber-500 block">Slack</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                        <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                            <span class="text-xs font-bold text-orange-400 block">Zapier</span>
-                            <span class="text-[10px] text-slate-400">Connected</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 2: WORKFLOWS -->
-            <div id="tab-workflows" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-2">Automatisierte Workflows</h3>
-                    <p class="text-xs text-slate-400 mb-6">Verwalte und erstelle neue Trigger- und Aktionsketten.</p>
-                    <div class="space-y-3">
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-white text-sm block">Lead Qualifizierung & Score</span>
-                                <span class="text-xs text-slate-400">Trigger: Form Submitted ➔ AI Engine ➔ CRM</span>
-                            </div>
-                            <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-bold">Aktiv</span>
-                        </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-white text-sm block">WhatsApp Sofort-Antwort</span>
-                                <span class="text-xs text-slate-400">Trigger: WhatsApp Message ➔ AI Responder</span>
-                            </div>
-                            <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-bold">Aktiv</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 3: CRM -->
-            <div id="tab-crm" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">CRM Pipeline Management</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs font-bold text-slate-400 uppercase block mb-3">Neu (12)</span>
-                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 mb-2 text-xs">
-                                <span class="font-bold text-white block">Nike Inc.</span>
-                                <span class="text-emerald-400">$15,000</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs font-bold text-slate-400 uppercase block mb-3">In Verhandlung (5)</span>
-                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 mb-2 text-xs">
-                                <span class="font-bold text-white block">Acme Corp</span>
-                                <span class="text-emerald-400">$8,500</span>
-                            </div>
-                        </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs font-bold text-slate-400 uppercase block mb-3">Gewonnen (24)</span>
-                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 mb-2 text-xs">
-                                <span class="font-bold text-white block">Tech Solutions</span>
-                                <span class="text-emerald-400">$22,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 4: LEADS -->
-            <div id="tab-leads" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">Leads Übersicht</h3>
-                    <div class="space-y-2 text-xs">
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <div>
-                                <span class="font-bold text-white block">John Doe (john@example.com)</span>
-                                <span class="text-slate-400">Score: 92 (Hot Lead)</span>
-                            </div>
-                            <span class="text-emerald-400 font-bold">Qualifiziert</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 5: TASKS -->
-            <div id="tab-tasks" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">Aufgabenverwaltung</h3>
-                    <div class="space-y-2 text-xs">
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <span>Follow up with John (Today, 10:00 AM)</span>
-                            <span class="bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded font-bold">High</span>
-                        </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <span>Send Proposal to Nike (Today, 12:30 PM)</span>
-                            <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded font-bold">Medium</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 6: AI AGENTS -->
-            <div id="tab-ai" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">AI Agents Konfiguration</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <span class="font-bold text-white block text-sm mb-1">Lead Qualifier</span>
-                            <span class="text-slate-400">Qualifies and scores new leads automatically.</span>
-                        </div>
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                            <span class="font-bold text-white block text-sm mb-1">Email Responder</span>
-                            <span class="text-slate-400">Handles email conversations and drafts replies.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 7: CAMPAIGNS -->
-            <div id="tab-campaigns" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">Campaign Performance</h3>
-                    <div class="space-y-3 text-xs">
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <span>Product Launch</span>
-                            <span class="text-emerald-400 font-bold">42.6% Open Rate</span>
-                        </div>
-                        <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
-                            <span>Re-engagement</span>
-                            <span class="text-emerald-400 font-bold">38.2% Open Rate</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TAB 8: ANALYTICS -->
-            <div id="tab-analytics" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">Detailed Analytics</h3>
-                    <p class="text-xs text-slate-400">Umsatz- und Wachstumsanalysen des laufenden Monats.</p>
-                </div>
-            </div>
-
-            <!-- TAB 9: INTEGRATIONS -->
-            <div id="tab-integrations" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">Verbundene Schnittstellen</h3>
-                    <p class="text-xs text-slate-400">Alle APIs, Webhooks und Cloud-Verbindungen sind aktiv.</p>
-                </div>
-            </div>
-
-            <!-- TAB 10: SETTINGS -->
-            <div id="tab-settings" class="tab-content hidden space-y-4">
-                <div class="bg-cardbg border border-bordercol rounded-2xl p-6">
-                    <h3 class="font-bold text-lg text-white mb-4">System Einstellungen</h3>
-                    <p class="text-xs text-slate-400">Kontodaten, API-Schlüssel und Benachrichtigungen verwalten.</p>
-                </div>
-            </div>
-
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold text-white mb-2">Live-Dashboard & KI-Simulator</h1>
+            <p class="text-slate-400 text-sm">Testen Sie hier, wie die KI Anfragen in Echtzeit verarbeitet und strukturiert.</p>
         </div>
 
-        <!-- RIGHT SIDEBAR (Tasks & Communication Hub wie im Bild) -->
-        <aside class="lg:col-span-3 space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
             
-            <!-- TASK AUTOMATION BOX -->
-            <div class="bg-cardbg border border-bordercol rounded-2xl p-5">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Task Automation</h3>
-                    <span class="text-[10px] text-neoncyan font-bold cursor-pointer">+ Create New Task</span>
-                </div>
+            <!-- Sidebar Navigation -->
+            <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-4 flex flex-col space-y-2">
+                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider px-3 mb-1">Navigation</span>
                 
-                <div class="space-y-2.5 text-xs">
-                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <span class="font-bold text-white block">Follow up with John</span>
-                            <span class="text-[10px] text-slate-400">Today, 10:00 AM</span>
-                        </div>
-                        <span class="bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded text-[10px] font-bold">High</span>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <span class="font-bold text-white block">Send Proposal to Nike</span>
-                            <span class="text-[10px] text-slate-400">Today, 12:30 PM</span>
-                        </div>
-                        <span class="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[10px] font-bold">Medium</span>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <span class="font-bold text-white block">Call with Sarah</span>
-                            <span class="text-[10px] text-slate-400">Tomorrow, 09:00 AM</span>
-                        </div>
-                        <span class="bg-rose-500/20 text-rose-400 px-2 py-0.5 rounded text-[10px] font-bold">High</span>
-                    </div>
-                    <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center justify-between">
-                        <div>
-                            <span class="font-bold text-white block">Update Deal Status</span>
-                            <span class="text-[10px] text-slate-400">Tomorrow, 04:00 PM</span>
-                        </div>
-                        <span class="bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded text-[10px] font-bold">Low</span>
-                    </div>
-                </div>
-            </div>
+                <button type="button" onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-white border border-slate-700 transition">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-500"></i>
+                    <span>Dashboard</span>
+                </button>
 
-            <!-- COMMUNICATION HUB (Live Chat Box) -->
-            <div class="bg-cardbg border border-bordercol rounded-2xl p-5">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Communication Hub</h3>
-                    <div class="flex space-x-2 text-[10px]">
-                        <span class="text-neoncyan font-bold cursor-pointer">WhatsApp</span>
-                        <span class="text-slate-500 cursor-pointer">Email</span>
-                        <span class="text-slate-500 cursor-pointer">SMS</span>
-                    </div>
-                </div>
+                <button type="button" onclick="switchTab('qualifier')" id="nav-qualifier" class="nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+                    <i data-lucide="bot" class="w-4 h-4 text-slate-400"></i>
+                    <span>KI Qualifier</span>
+                </button>
 
-                <!-- Chat Kontakt Info -->
-                <div class="bg-slate-900 border border-slate-800 p-3 rounded-xl flex items-center space-x-3 mb-4">
-                    <div class="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-xs">JD</div>
-                    <div>
-                        <span class="text-xs font-bold text-white block">John Doe</span>
-                        <span class="text-[10px] text-emerald-400 block">● Online</span>
-                    </div>
-                </div>
+                <button type="button" onclick="switchTab('posteingang')" id="nav-posteingang" class="nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+                    <i data-lucide="inbox" class="w-4 h-4 text-slate-400"></i>
+                    <span>Posteingang</span>
+                    <span class="ml-auto bg-brand-600 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">3</span>
+                </button>
 
-                <!-- Chat Verlauf -->
-                <div class="space-y-3 mb-4 text-xs">
-                    <div class="bg-slate-900 p-3 rounded-xl rounded-tl-none border border-slate-800 max-w-[85%]">
-                        <p class="text-slate-200">Hi John, thanks for your interest in our solution!</p>
-                        <span class="text-[9px] text-slate-500 block mt-1 text-right">10:30 AM</span>
-                    </div>
-                    <div class="bg-slate-900 p-3 rounded-xl rounded-tl-none border border-slate-800 max-w-[85%]">
-                        <p class="text-slate-200">Hi! I'd like to know more about the pricing.</p>
-                        <span class="text-[9px] text-slate-500 block mt-1 text-right">10:31 AM</span>
-                    </div>
-                    <div class="bg-indigo-950/50 p-3 rounded-xl rounded-tr-none border border-indigo-500/30 max-w-[85%] ml-auto">
-                        <p class="text-slate-200">Sure! I'll send the details right away.</p>
-                        <span class="text-[9px] text-indigo-300 block mt-1 text-right">10:32 AM</span>
-                    </div>
-                </div>
+                <button type="button" onclick="switchTab('crm')" id="nav-crm" class="nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+                    <i data-lucide="kanban" class="w-4 h-4 text-slate-400"></i>
+                    <span>CRM Pipeline</span>
+                </button>
 
-                <!-- Chat Input -->
-                <div class="relative">
-                    <input type="text" placeholder="Type a message..." class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-neonpurple">
-                    <button class="absolute right-2 top-2 bg-neonpurple text-white p-1 rounded-lg">
-                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                    </button>
-                </div>
-            </div>
+                <button type="button" onclick="switchTab('rechnungen')" id="nav-rechnungen" class="nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition">
+                    <i data-lucide="file-text" class="w-4 h-4 text-slate-400"></i>
+                    <span>Rechnungen</span>
+                </button>
 
-            <!-- CAMPAIGN PERFORMANCE -->
-            <div class="bg-cardbg border border-bordercol rounded-2xl p-5">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-300">Campaign Performance</h3>
-                    <span class="text-[10px] text-slate-400">This Month ▾</span>
-                </div>
-                <div class="space-y-3 text-xs">
-                    <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-slate-300">Product Launch</span>
-                            <span class="text-emerald-400 font-bold">42.6%</span>
-                        </div>
-                        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-emerald-400 h-full w-[42.6%]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-slate-300">Re-engagement</span>
-                            <span class="text-emerald-400 font-bold">38.2%</span>
-                        </div>
-                        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-neoncyan h-full w-[38.2%]"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between mb-1">
-                            <span class="text-slate-300">Newsletter May</span>
-                            <span class="text-emerald-400 font-bold">51.3%</span>
-                        </div>
-                        <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden">
-                            <div class="bg-neonpurple h-full w-[51.3%]"></div>
+                <div class="pt-6 border-t border-slate-800/80 mt-4">
+                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-xl flex items-center space-x-3">
+                        <div class="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-xs">WS</div>
+                        <div class="text-left">
+                            <span class="text-xs font-bold block text-white">Lexoffice Sync</span>
+                            <span class="text-[10px] text-emerald-400 block">● Verbunden</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </aside>
+            <!-- Content Area (Rechts) -->
+            <div class="lg:col-span-3 space-y-6">
 
+                <!-- TAB 1: DASHBOARD -->
+                <div id="tab-dashboard" class="tab-content space-y-6">
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-nordic-900 border border-slate-800 p-5 rounded-2xl">
+                            <span class="text-xs text-slate-400 font-medium block mb-1">Neue Anfragen (Heute)</span>
+                            <div class="text-2xl font-black text-white">14</div>
+                            <span class="text-[11px] text-emerald-400 font-semibold block mt-1">↑ +28% ggü. Vorwoche</span>
+                        </div>
+
+                        <div class="bg-nordic-900 border border-slate-800 p-5 rounded-2xl">
+                            <span class="text-xs text-slate-400 font-medium block mb-1">Offenes Pipeline-Volumen</span>
+                            <div class="text-2xl font-black text-white">18.450 €</div>
+                            <span class="text-[11px] text-slate-400 block mt-1">8 qualifizierte Deals</span>
+                        </div>
+
+                        <div class="bg-nordic-900 border border-slate-800 p-5 rounded-2xl">
+                            <span class="text-xs text-slate-400 font-medium block mb-1">Automations-Quote</span>
+                            <div class="text-2xl font-black text-white">94.2%</div>
+                            <span class="text-[11px] text-emerald-400 block mt-1">Ohne manuelles Eingreifen</span>
+                        </div>
+                    </div>
+
+                    <!-- KI Anfragen-Simulator Card -->
+                    <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
+                            <h3 class="font-bold text-base text-white flex items-center gap-2">
+                                <i data-lucide="sparkles" class="text-brand-500 w-4 h-4"></i> KI Anfragen-Simulator
+                            </h3>
+                            <span class="text-xs text-slate-500">Testen Sie verschiedene Szenarien</span>
+                        </div>
+
+                        <label class="text-xs text-slate-400 block mb-2 font-medium">Simulierte Kundennachricht (Eingang via WhatsApp/E-Mail):</label>
+                        <textarea id="sample-input" rows="4" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-sm text-slate-200 focus:outline-none focus:border-brand-500 transition resize-none leading-relaxed mb-4">Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?</textarea>
+
+                        <div class="flex justify-end mb-6">
+                            <button type="button" id="analyze-btn" onclick="runSimulation()" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-2 shadow-lg shadow-brand-600/20">
+                                <i data-lucide="cpu" class="w-4 h-4"></i>
+                                <span id="btn-text">Anfrage jetzt durch KI analysieren</span>
+                            </button>
+                        </div>
+
+                        <!-- Ergebnis Box -->
+                        <div class="bg-slate-950 border border-slate-800/80 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Ergebnis der KI-Analyse</span>
+                                <span id="res-badge" class="text-[10px] bg-red-500/10 text-red-400 font-bold px-2 py-0.5 rounded border border-red-500/20">HOT LEAD (Notfall/Hochwert)</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mb-3 text-xs">
+                                <div>
+                                    <span class="text-slate-500 block">Kategorie:</span>
+                                    <span id="res-cat" class="font-bold text-white">Agentur / Webdesign</span>
+                                </div>
+                                <div>
+                                    <span class="text-slate-500 block">Geschätzter Wert:</span>
+                                    <span id="res-val" class="font-bold text-emerald-400">12.000 € - 15.000 €</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-[11px] text-slate-500 block mb-1">Generierter Antwortentwurf (WhatsApp):</span>
+                                <p id="res-reply" class="text-xs text-slate-300 italic bg-slate-900/90 p-3 rounded-lg border border-slate-800 leading-relaxed">
+                                    "Vielen Dank für Ihre Projektanfrage! Das klingt nach einem spannenden Vorhaben. Gerne bieten wir Ihnen nächste Woche einen kurzen Ersttermin per Zoom an."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: KI QUALIFIER -->
+                <div id="tab-qualifier" class="tab-content hidden space-y-4">
+                    <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-6">
+                        <h3 class="font-bold text-lg text-white mb-2">KI Qualifier - Regelwerk</h3>
+                        <p class="text-xs text-slate-400 mb-6">Hier legen Sie fest, wie die KI eingehende Leads automatisch bewertet und priorisiert.</p>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs font-bold text-white block">Budget-Schwellenwert für Hot-Leads</span>
+                                    <span class="text-[11px] text-slate-400">Anfragen ab 5.000 € automatisch als 'Priorität 1' markieren</span>
+                                </div>
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 font-bold px-3 py-1 rounded-full border border-emerald-500/20">Aktiv</span>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-xs font-bold text-white block">Automatische WhatsApp Notfall-Erkennung</span>
+                                    <span class="text-[11px] text-slate-400">Wörter wie 'Rohrbruch', 'Dringend', 'Wasserschaden' lösen Push-Alarm aus</span>
+                                </div>
+                                <span class="text-xs bg-emerald-500/10 text-emerald-400 font-bold px-3 py-1 rounded-full border border-emerald-500/20">Aktiv</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: POSTEINGANG -->
+                <div id="tab-posteingang" class="tab-content hidden space-y-4">
+                    <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-6">
+                        <h3 class="font-bold text-lg text-white mb-4">Zentraler KI-Posteingang</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-brand-500/50 transition cursor-pointer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-xs font-bold text-white">Markus Weber (E-Commerce Studio)</span>
+                                    <span class="text-[10px] text-slate-500">Vor 12 Min.</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mb-2">"Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer Webseite..."</p>
+                                <span class="text-[10px] bg-brand-600/20 text-brand-400 px-2 py-0.5 rounded font-bold">KI-Status: Antwortentwurf bereit</span>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-brand-500/50 transition cursor-pointer">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-xs font-bold text-white">Sarah Schmidt</span>
+                                    <span class="text-[10px] text-slate-500">Vor 45 Min.</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mb-2">"Guten Tag, wann wäre eine Besichtigung der 3-Zimmer-Wohnung möglich?"</p>
+                                <span class="text-[10px] bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold">KI-Status: Termin-Vorschlag gesendet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: CRM PIPELINE -->
+                <div id="tab-crm" class="tab-content hidden space-y-4">
+                    <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-6">
+                        <h3 class="font-bold text-lg text-white mb-4">CRM Lead-Pipeline</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Spalte 1 -->
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <span class="text-xs font-bold text-slate-400 block mb-3 uppercase tracking-wider">Neu eingegangen (2)</span>
+                                <div class="bg-nordic-900 p-3 rounded-lg border border-slate-800 mb-2">
+                                    <span class="text-xs font-bold text-white block">Apotheke Müller</span>
+                                    <span class="text-[11px] text-emerald-400 font-semibold block">2.400 €</span>
+                                </div>
+                            </div>
+
+                            <!-- Spalte 2 -->
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <span class="text-xs font-bold text-slate-400 block mb-3 uppercase tracking-wider">Qualifiziert (3)</span>
+                                <div class="bg-nordic-900 p-3 rounded-lg border border-slate-800 mb-2">
+                                    <span class="text-xs font-bold text-white block">Weber E-Commerce</span>
+                                    <span class="text-[11px] text-emerald-400 font-semibold block">15.000 €</span>
+                                </div>
+                            </div>
+
+                            <!-- Spalte 3 -->
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <span class="text-xs font-bold text-slate-400 block mb-3 uppercase tracking-wider">Gewonnen (5)</span>
+                                <div class="bg-nordic-900 p-3 rounded-lg border border-slate-800 mb-2">
+                                    <span class="text-xs font-bold text-white block">Bäckerei Klein</span>
+                                    <span class="text-[11px] text-emerald-400 font-semibold block">1.050 €</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 5: RECHNUNGEN -->
+                <div id="tab-rechnungen" class="tab-content hidden space-y-4">
+                    <div class="bg-nordic-900 border border-slate-800 rounded-2xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-lg text-white">Automatische Rechnungen (Lexoffice Sync)</h3>
+                            <button type="button" onclick="alert('Neue Test-Rechnung wird erstellt...')" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-xs font-bold">
+                                + Neue Rechnung
+                            </button>
+                        </div>
+                        
+                        <div class="space-y-2 text-xs">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <div>
+                                    <span class="font-bold text-white block">RE-2026-0041 (Bäckerei Klein)</span>
+                                    <span class="text-[10px] text-slate-400">Automatisch erstellt nach CRM-Gewinn</span>
+                                </div>
+                                <span class="font-bold text-emerald-400">1.050,00 € (Bezahlt)</span>
+                            </div>
+
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                                <div>
+                                    <span class="font-bold text-white block">RE-2026-0042 (Weber E-Commerce)</span>
+                                    <span class="text-[10px] text-slate-400">Entwurf in Lexoffice synchronisiert</span>
+                                </div>
+                                <span class="font-bold text-amber-400">15.000,00 € (Offen)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </main>
 
-    <!-- JavaScript für Tab-Navigation -->
+    <!-- JavaScript für Umschaltung -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             if (window.lucide) {
@@ -558,6 +314,7 @@
             }
         });
 
+        // Tab-Wechsel Logik
         function switchTab(tabName) {
             // Alle Tabs ausblenden
             document.querySelectorAll('.tab-content').forEach(el => {
@@ -565,21 +322,88 @@
             });
 
             // Alle Nav-Buttons zurücksetzen
-            document.querySelectorAll('.sidebar-btn').forEach(btn => {
-                btn.className = "sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/50 transition";
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition";
             });
 
-            // Ziel-Tab anzeigen
-            const target = document.getElementById('tab-' + tabName);
-            if (target) {
-                target.classList.remove('hidden');
+            // Gewählten Tab anzeigen
+            const targetTab = document.getElementById('tab-' + tabName);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
             }
 
-            // Aktiven Button hervorheben
+            // Gewählten Nav-Button aktiv setzen
             const activeBtn = document.getElementById('nav-' + tabName);
             if (activeBtn) {
-                activeBtn.className = "sidebar-btn w-full flex items-center space-x-3 px-3 py-2.5 rounded-xl text-xs font-semibold bg-neonpurple/20 text-neoncyan border border-neonpurple/40 transition";
+                activeBtn.className = "nav-btn w-full flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-white border border-slate-700 transition";
             }
+        }
+
+        // Branchen-Presets
+        function setIndustry(type) {
+            const btnService = document.getElementById('btn-service');
+            const btnCraft = document.getElementById('btn-craft');
+            const btnAgency = document.getElementById('btn-agency');
+            const btnRealestate = document.getElementById('btn-realestate');
+            const input = document.getElementById('sample-input');
+
+            const inactive = "px-3 py-1 rounded-md text-slate-300 hover:text-white transition";
+            const active = "px-3 py-1 rounded-md bg-brand-600 text-white font-semibold transition";
+
+            [btnService, btnCraft, btnAgency, btnRealestate].forEach(btn => { if(btn) btn.className = inactive; });
+
+            if (type === 'craft') {
+                if(btnCraft) btnCraft.className = active;
+                input.value = "Hallo, wir haben einen Rohrbruch im Bad. Das Wasser läuft in die Wohnung darunter. Bitte schnellstmöglich kommen!";
+            } else if (type === 'agency') {
+                if(btnAgency) btnAgency.className = active;
+                input.value = "Hi! Wir suchen eine Agentur für ein Rebranding und den Relaunch unserer E-Commerce-Webseite. Budget ca. 15.000 €. Habt ihr Kapazitäten?";
+            } else if (type === 'realestate') {
+                if(btnRealestate) btnRealestate.className = active;
+                input.value = "Guten Tag, ich interessiere mich für die 3-Zimmer-Wohnung in der Hauptstraße. Wann wäre ein Besichtigungstermin möglich?";
+            } else {
+                if(btnService) btnService.className = active;
+                input.value = "Hallo, wir haben in unserem Bürogebäude einen Notfall: Die Hauptwasserleitung leckt. Bitte dringend heute jemanden schicken!";
+            }
+
+            runSimulation();
+        }
+
+        // KI Simulation
+        function runSimulation() {
+            const inputVal = document.getElementById('sample-input').value.trim();
+            const reply = document.getElementById('res-reply');
+            const val = document.getElementById('res-val');
+            const cat = document.getElementById('res-cat');
+            const btnText = document.getElementById('btn-text');
+
+            if (!inputVal) return;
+
+            btnText.innerText = "Analysiere...";
+
+            setTimeout(() => {
+                const lower = inputVal.toLowerCase();
+                
+                if (lower.includes("rohrbruch") || lower.includes("wasser") || lower.includes("notfall")) {
+                    cat.innerText = "Handwerk / Sanitär Notdienst";
+                    val.innerText = "450 € - 950 €";
+                    reply.innerText = '"Hallo! Ein Techniker wurde sofort verständigt. Wir melden uns in max. 15 Minuten zur Notfall-Terminabsprache."';
+                } else if (lower.includes("rebranding") || lower.includes("agentur") || lower.includes("budget")) {
+                    cat.innerText = "Agentur / Webdesign";
+                    val.innerText = "12.000 € - 15.000 €";
+                    reply.innerText = '"Vielen Dank für Ihre Projektanfrage! Das klingt nach einem spannenden Vorhaben. Gerne bieten wir Ihnen nächste Woche einen kurzen Ersttermin per Zoom an."';
+                } else if (lower.includes("wohnung") || lower.includes("besichtigung") || lower.includes("hauptstraße")) {
+                    cat.innerText = "Immobilien / Besichtigung";
+                    val.innerText = "1.200 € / Monat";
+                    reply.innerText = '"Guten Tag! Vielen Dank für Ihr Interesse an der 3-Zimmer-Wohnung. Gerne bieten wir Ihnen nächsten Dienstag um 16:00 Uhr einen Besichtigungstermin an."';
+                } else {
+                    cat.innerText = "Büroservice / Allgemein";
+                    val.innerText = "350 € - 800 €";
+                    reply.innerText = '"Vielen Dank für Ihre Anfrage! Wir haben Ihre Nachricht registriert und bearbeiten Ihr Anliegen umgehend."';
+                }
+
+                btnText.innerText = "Anfrage jetzt durch KI analysieren";
+            }, 300);
         }
     </script>
 </body>
